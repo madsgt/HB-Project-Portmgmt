@@ -6,16 +6,11 @@ import datetime #get the timestamp right
 import os # to access the os environment variables
 import urllib2
 import yahoo_finance
-import pandas 
-from pandas.io.data import DataReader #to work with such time series in Python
+
+# from pandas.io.data import DataReader #to work with such time series in Python
 
 # make a printer
 printer = pprint.PrettyPrinter()
-
-
-# def timestamps():
-
-# 	pass
 
 
 # def get_historical_quotes():
@@ -32,12 +27,6 @@ printer = pprint.PrettyPrinter()
 # 	pass
 
 
-
-
-#ticker_df = pd.DataFrame(ticker_data)
-
-#ticker_df.to_csv("/home/animesh/ticker_stock_data.csv")
-
 def get_single_stock_data(ticker):
 
 	"""get single stock data that takes in a single ticker symbol and returns a dictionary"""
@@ -48,8 +37,9 @@ def get_single_stock_data(ticker):
 	str_past_date = datetime.datetime.strftime(past_date, "%Y-%m-%d")
 	str_today_date = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
 	ticker_data = symbol.get_historical(str_past_date, str_today_date)
+	ticker_mcap = symbol.get_market_cap()
 
-	return {ticker : ticker_data}
+	return {ticker : (ticker_data, ticker_mcap)}
 
 
 def get_all_stock_data(tickers):
@@ -60,16 +50,11 @@ def get_all_stock_data(tickers):
 
 	for ticker in tickers:
 
-		this = get_single_stock_data(ticker)
-		historicaldata.append(this)
+		onequote = get_single_stock_data(ticker)
+		historicaldata.append(onequote)
 
 	return historicaldata
 
-		# add to dictionary
-
-		# helper functions 
-
-		# #routes later
 
 if __name__=="__main__":
 

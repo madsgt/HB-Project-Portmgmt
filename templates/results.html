@@ -1,0 +1,54 @@
+<!-- To print the result output to user -->
+<!-- Need a pie chart as output -->
+
+
+<!-- For creating the pie chart: https://developers.google.com/chart/interactive/docs/quick_start -->
+
+<!-- Need to input calculated infor here dynamically to calculate the pie chart -->
+
+<html>
+  <head>
+  	<script>
+
+  	var myDoughnutChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: options
+});
+    
+    new Chart(ctx,{
+    type:"doughnut",
+    animation:{
+        animateScale:true
+    }
+});
+
+    /*var data = {
+    labels: [
+        "Red",
+        "Blue",
+        "Yellow"
+    ],
+    datasets: [
+        {
+            data: [300, 50, 100],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }]
+}; #example data object*/
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+  </body>
+</html>
