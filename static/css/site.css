@@ -5,19 +5,50 @@ h4,
 h5,
 h6,
 th {
-        font-family: 'Lobster', sans-serif;
-        font-weight: normal;
+    font-family: 'Lobster', sans-serif;
+    font-weight: normal;
 }
 
 body {
-    font-size: 2em;
+	  font-size: 2em;
+	  background-color: powderblue;
+	  color: blue;
+      text-align: center;
 }
 
 h1 {
-    height: 150px;
+    height: 80px;
+    color: blue;
     padding-top:  0.8em;
     text-align: center;
-    font-size: 3em;
+    font-size: 2em;
     background: blue url(http://www.graphicsfuel.com/wp-content/uploads/2011/11/pie-chart-512.png) no-repeat right;
-    background-size: 220px 210px;
+    background-size: 200px 190px;
+}
+
+#homepage-title {
+	height: 30px;
+    font-size: 1em;
+}
+
+p {
+    color: black;
+    border: 1px solid powderblue;
+    margin: 100px;
+}
+
+p.error {
+    color: red;
+}
+
+#footer {
+	position: relative;
+	left: 0;
+    bottom:0;
+    border: 1px solid grey;
+    width:100%;
+    bottom:0;
+    padding:1px 0;
+	color: black;
+
 }

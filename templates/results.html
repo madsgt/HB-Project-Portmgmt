@@ -5,50 +5,37 @@
 <!-- For creating the pie chart: https://developers.google.com/chart/interactive/docs/quick_start -->
 
 <!-- Need to input calculated infor here dynamically to calculate the pie chart -->
+{% extends 'base.html' %}
 
-<html>
-  <head>
-  	<script>
+{% block title %}Your Stock Portfolio Allocation Pie!{% endblock %}
 
-  	var myDoughnutChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: data,
-    options: options
-});
-    
-    new Chart(ctx,{
-    type:"doughnut",
-    animation:{
-        animateScale:true
-    }
-});
+  	
+  	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js">
+</script>
 
-    /*var data = {
-    labels: [
-        "Red",
-        "Blue",
-        "Yellow"
-    ],
-    datasets: [
-        {
-            data: [300, 50, 100],
-            backgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56"
-            ],
-            hoverBackgroundColor: [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56"
-            ]
-        }]
-}; #example data object*/
+
+<h2> Stock Pie </h2>
+ <!--Div that will hold the pie chart-->
+<div class="stock-chart">
+<canvas id="donutChart"></canvas>
+<div id="donutLegend" class="chart-legend"></div>
+<div>
+
+	<script>
+	var options = {
+      responsive: true
+    };
+
+    // Make Donut Chart of percent of different types of Melons
+    var ctx_donut = $("#donutChart").get(0).getContext("2d");
+
+    $.get("/final.json", function (data) {
+      var myDonutChart = new Chart(ctx_donut).Doughnut(data.xxxxx, options);
+      $('#donutLegend').html(myDonutChart.generateLegend());
+    });
+
+  	
     </script>
-  </head>
-
-  <body>
-    <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
-  </body>
-</html>
+  
+{% endblock %}

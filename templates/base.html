@@ -16,12 +16,10 @@
 </head>
 <body>
 <div class="container">
+
+
   <h1>
     <center>Your Stock Allocation Pie!</center>
- 
-
-
-
   </h1>
   {% for msg in get_flashed_messages() %}
     <div class="alert alert-info">{{ msg }}</div>
@@ -32,9 +30,13 @@
   <!-- what is this doing not sure -->
 </div>
 
-<footer>
-   <p>Data and information is provided for informational purposes only, and is not intended for trading purposes. Neither the site or the site owner shall be liable for any errors or delays in the content, or for any actions taken in reliance thereon</p>
-</footer> 
+<br/>
+
+<div id="footer">
+  <font face="arial" size="-2">
+    <p><center>Data and information is provided for informational purposes only, and is not intended for trading purposes. Neither the site or the site owner shall be liable for any errors or delays in the content, or for any actions taken in reliance thereof</center></p>
+  </font>
+</div>
 
 </body>
 </html>

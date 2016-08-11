@@ -19,7 +19,7 @@ def load_stocks():
 
 		stock = Stock(symbol=symbol, name=name, sector=sector)
 
-		db.session.add(user) # add to the session for storing
+		db.session.add(stock) # add to the session for storing
 
 	db.session.commit()
 
@@ -30,9 +30,17 @@ def load_favorites():
 
 	print "Favorites"
 
-	# Need help on this, create dummy data
+	# Need help on this, created dummy data, how will I create the counter, as user clicks the counter adds
 
-	for i, row in enumerate(open())
+	for i, row in enumerate(open("seed_data/dummy_clicks.csv")):
+		row = row.rstrip()
+		symbol, counter = row.split(",")
+
+		counter = Favorite(symbol=symbol, counter=counter)
+		db.session.add(counter)
+
+	db.session.commit()
+
 
 
 
