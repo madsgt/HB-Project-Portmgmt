@@ -10,6 +10,7 @@ import jinja2
 import optimization
 
 
+
 app = Flask(__name__)
 
 # Need to use Flask sessioning features
@@ -22,6 +23,7 @@ app.secret_key = 'this-should-be-something-unguessable'
 # error.
 
 app.jinja_env.undefined = jinja2.StrictUndefined
+app.jinja_env.auto_reload = True
 
 @app.route("/")
 def index():
@@ -29,16 +31,89 @@ def index():
 
     return render_template("homepage.html")
 
+#------------------------------------------------------------------------------------    
 
 
+# Similar to below show list of stocks to select from by way of dropdown or autocomplete
 @app.route("/start")
 def user_data():
-	"""process the user data and store it"""
+#     """Return page showing text box with list of stocks to choose from a dropdown or autocomplete """
 
-	# need to capture data from form that user enters and store it in db w/o logging in ,use of Javascript
-	#capture submit
+#     stocks_list = stocks.get_all()
+#     return render_template("useractivity_capture.html",
+#                            stocks_list=stocks_list)
+#     or return redirect("/useractivity_capture.html")
+pass
+#-----------------------------------------------------------------------------------------------
 
-	return redirect("/useractivity_capture.html")
+# SIMILAR TO BELOW ROUTE SHOW USER THE LIST OF STOCKS ADDED FOR ANALYSIS
+@app.route("/list")
+def add_to_list():
+
+#     """Add the list of stocks and display the information."""
+
+#     stock_total = 0
+
+#     # Get the stock_list (or an empty list if there's no stock_list yet)
+#     add_stocks = session.get('stock_list', [])
+
+#     # We'll use this dictionary to keep track of the symbols
+#     # we have in the stock_list.
+#     #
+#     # Format: symbol -> {dictionary-of-stock_list-info}
+
+#     stock_list = {}
+
+#     # Loop over the symbols in the session stock_list to build up the
+#     # `stock_list` dictionary
+
+#     for symbol in add_stocks:
+
+#         if symbol in stock_list:
+#             stock_list_info = stock_list[symbol]= {
+#                 'symbol': ccccccc.symbol,
+#                 'count': 0,
+#                   }
+
+#         # increase  stock-total count
+#         stock_list_info['stock_total'] += 1
+#      
+#     # Get the melon-info dictionaries from our cart
+#     stock_list = stock_list.values()
+
+#     return render_template("user_list.html", stock_list=stock_list, stock_total=stock_total)
+
+pass
+
+#--------------------------------------------------------------------------------
+
+@app.route("/add_to_list/<string:symbol>")
+def add_to_list(symbol):
+    """Add a stock to list and redirect to user_list.html.
+
+    # When a stock is added to the list, redirect browser to the user_list
+    # page and display a confirmation message: 'Successfully added to list'.
+    # """
+
+    # # Check if we have a stock_list in the session dictionary and, if not, add one
+    # if 'stock_list' in session:
+    #     stock_list = session['stock_list']
+
+    # else:
+    #     stock_list = session['stock_list'] = []
+
+    # # Add stock to stock_list
+    # stock_list.append(symbol)
+
+    # # Show user success message on next page load
+    # flash("Successfully added to list.")
+
+    # # Redirect to shopping cart page
+    # return redirect("/list")
+
+pass
+
+#------------------------------------------------------------------------------------	
 
 
 

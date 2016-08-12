@@ -11,5 +11,6 @@ CREATE TABLE favorites (
 
 
 -- Materialized view example
+/*May not need this file*/
 
 

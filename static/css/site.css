@@ -11,17 +11,16 @@ th {
 
 body {
 	  font-size: 2em;
-	  background-color: powderblue;
+	  background-color: grey;
 	  color: blue;
       text-align: center;
 }
 
 h1 {
-    height: 80px;
-    color: blue;
+    height: 150px;
     padding-top:  0.8em;
     text-align: center;
-    font-size: 2em;
+    font-size: 3em;
     background: blue url(http://www.graphicsfuel.com/wp-content/uploads/2011/11/pie-chart-512.png) no-repeat right;
     background-size: 200px 190px;
 }

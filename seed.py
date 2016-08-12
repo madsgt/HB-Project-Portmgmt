@@ -5,7 +5,7 @@ import sqlalchemy
 
 from data_model import Stock, Favorite, connect_to_db, db
 
-from algorith_server import app
+from algorithm_server import app
 
 
 def load_stocks():
@@ -23,6 +23,18 @@ def load_stocks():
 
 	db.session.commit()
 
+#-------------------------------------------------------------
+
+def load_all_stock_data():
+
+
+	pass
+	# we need to load and store the api data some where to extract 
+	# data is not is json or csv so how to load it 
+
+
+
+#	---------------------------------------------------------------------
 
 def load_favorites():
 

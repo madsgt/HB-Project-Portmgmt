@@ -13,23 +13,23 @@ import yahoo_finance
 printer = pprint.PrettyPrinter()
 
 
-# def get_historical_quotes():
 
-# #self, start_date, end_date, ticker
-# 	"""Return daily data for 3 years"""
-
-# 	url = 'https://query.yahooapis.com/v1/yql?q=desc%20yahoo.finance.historicaldata&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback='
-
-# 	r = requests.get(url) #Request data 
-
-# 	quotes = json.loads(json_string) #Convert JSON to Python dictionary
-
-# 	pass
 
 
 def get_single_stock_data(ticker):
 
-	"""get single stock data that takes in a single ticker symbol and returns a dictionary"""
+	"""get single stock data that takes in a single ticker symbol and returns a dictionary
+
+	  	Expected data
+	  		[([{'Adj_Close': '28.35',
+            'Close': '28.35',
+            'Date': '2013-08-12',
+            'High': '28.370001',
+            'Low': '27.50',
+            'Open': '27.549999',
+            'Symbol': 'YHOO',
+            'Volume': '16561900'}], '1.25B')}] """
+
 
 
 	symbol = yahoo_finance.Share(ticker)
