@@ -1,0 +1,210 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Not sure if I need a form action or a form class, this will capture all the info user enters in the form
+once the user enters info he is taken back or to user_list.html -->
+<form action="/user_list.html">
+<div class="row">
+<table border="0" cellspacing="4" cellpadding="0">
+	<tbody>
+		<tr bgcolor="#6699cc">
+			<td colspan="4">
+				<table style="width:100%" border="0" cellspacing="0" cellpadding="4">
+					<b><font face="arial" size="+2"><center>Pick Your Stocks.</center></font></b>
+			</td>
+		</tr>
+	<tr> <p><center>Choose your Stock Symbol: </center></p><br></tr>
+	<!-- we start with <input> and <datalist> elements. Ensure that you link the two using the id and list attributes. -->
+    
+	<div class="fieldwrapper">
+    <tr><center><input type="text" id="ajax" list="json-datalist" placeholder="e.g. GOOG">
+    	<input type="submit" id="addbutton" value="ADD" />
+		<datalist id="json-datalist"></datalist></center> </tr>
+	<script>
+	// Get the <datalist> and <input> elements.
+	var dataList = document.getElementById('json-datalist');
+	var input = document.getElementById('ajax');
+    /*to load the JSON file (S&P500constituents.json) and populate the options for the <datalist> element.*/
+    // Create a new XMLHttpRequest.
+	var request = new XMLHttpRequest();
+
+	// Handle state changes for the request.
+	request.onreadystatechange = function(response) {
+	  if (request.readyState === 4) {
+	    if (request.status === 200) {
+	      // Parse the JSON
+	      var jsonOptions = JSON.parse(request.responseText);
+
+	      // Loop over the JSON array.
+	      jsonOptions.forEach(function(item) {
+	        // Create a new <option> element.
+	        var option = document.createElement('option');
+	        // Set the value using the item in the JSON array.
+	        option.value = item;
+	        // Add the <option> element to the <datalist>.
+	        dataList.appendChild(option);
+	      });
+
+	      // Update the placeholder text.
+	      input.placeholder = "e.g. GOOG";
+	    } else {
+	      // An error occured :(
+	      input.placeholder = "Couldn't load symbol options :(";
+	    }
+	  }
+	};
+
+// Update the placeholder text.
+input.placeholder = "Loading symbols...";
+
+// Set up and make the request.
+request.open('GET', 'S&P500constituents.json', true);
+request.send();
+# cant get the json to load 
+
+
+
+</script> 
+</div>
+<br>
+<center><p>Note: You may choose minimum 2 and maximum 5 symbols</p></center>
+
+<div>
+<tr>
+	<p><center>Kindly help us with some additional information:</center>
+	</p></tr>
+<tr>
+	<th>Age Group:</th>
+	<td>
+	<select>
+	  <option value="None"></option>	
+	  <option value="young">20-30 Years</option>
+	  <option value="midage">30-45 Years </option>
+	  <option value="mature">45-60 Years</option>
+	  <option value="old">>60 Years</option>
+	</select>
+	</td>
+</tr>
+<tr>	
+	<th>Gender:</th>
+	<td>
+	<select>
+	  <option value="None"></option>
+	  <option value="male">Male</option>
+	  <option value="female">Female</option>
+	</select>
+	</td>
+</tr>
+</tr>
+	<th>Annual Income Range:</th>
+	<td>
+	<select>
+	  <option value="None"></option>	
+	  <option value="median">$45-$80 K</option>
+	  <option value="average">$80-$120 K</option>
+	  <option value="high">$120-$200 K</option>
+	  <option value="rich">>$200 K</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<th>Investible Surplus:</th>
+	<td>
+	<select>
+	  <option value="None"></option>		
+	  <option value="low">$1-$5 K</option>
+	  <option value="medium">$5-$10 K</option>
+	  <option value="above">>$10 K</option>
+	</select>
+	</td>
+</tr>
+
+<!-- Use a input range slider instead -->
+<tr>
+	<th>Risk Tolerance:</th>
+	<td>
+	<select>
+	  <option value="None"></option>		
+	  <option value="minimum">Risk Averse</option>
+	  <option value="neutral">Risk Neutral</option>
+	  <option value="risky">Risk Taker</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<th>Return Expectations:</th>
+	<td>
+	<select>
+	  <option value="None"></option>	
+	  <option value="atleast">Risk Averse</option>
+	  <option value="neutral">Risk Neutral</option>
+	  <option value="risky">Risk Taker</option>
+	</select>
+	</td>
+</tr>
+
+<br>
+
+  <tr><center><input type="submit" value="SUBMIT"></center> </tr>
+</div>3669999
+<!-- 
+
+	4) Another button for user to decide to go ahead
+	<input type="submit" value="Ready to Go Ahead">
+	
+	flash("Cool we are all set!!") -Once 2 or more stocks are added need a flash message, ' Cool we are all set!!'
+	
+	
+	5) create a check to ensure minimum 2 and max 5 symbols are added 
+
+	6)	need to capture user data from form that user enters and store it in db w/o logging in ,use of Javascript
+	    one form action to send(stocks +user data) to a flask route (and in the server file store it and later do diff 
+	    things with the diff data points I get (2 functions) , 1 function can have the frequency of stocks
+	    or make a function to session.add and commit in tables . check if it works 
+
+	7) need to ensure that the same symbol is not chosen twice
+
+ -->
+	
+</form>
+
+
+
+
+
+
+
+
+
+<!-- $('#counter').data('count', 0);
+$('#update').click(function(){
+    $('#counter').html(function(){
+        var $this = $(this),
+            count = $this.data('count') + 1;
+
+        $this.data('count', count);
+        return count;
+    });
+}); 
+
+or 
+
+can I use the below to get the frequency from the table storing the counter and use it to present a table in the html
+def _counts(data):
+ # Generate a table of sorted (symbol, frequency) pairs.
+	table = collections.Counter(iter(data)).most_common()
+	if not table:
+		return table
+ # Extract the values with the highest frequency.
+	   maxfreq = table[0][1]
+	    for i in range(1, len(table)):
+	        if table[i][1] != maxfreq:
+	            table = table[:i]
+		           break
+	   return table 
+want to count the times that the user chooses a stock 
+ -->
+
+
+<!--<p class="error">I am different</p> for error messages  -->

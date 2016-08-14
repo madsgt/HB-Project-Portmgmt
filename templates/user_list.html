@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- User List of Stocks displayed and asks them to either go ahead or go back , once they decide to go ahead
+we go to results.html page -->
+
+<table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Sector</th>        
+            </tr>
+        </thead>
+        <tbody>
+        	{% for stock in stock_list %}
+        <tr>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            <td>{{ stock['symbol'] }}</td>
+            <td>{{ stock['count'] }}</td>
+
+
+
+
+
+
+       
+            <div id="frm">
+            Involved: 
+            <form>
+            <input type="submit" value="Go Back"> <!--To Return to Previous Page  -->
+            </form>
+             <p>OR</p>    
+            <form>
+            <input type="submit" value="Go for It">  <!--To move to results Page  --> 
+            </form>
+            </div>
+

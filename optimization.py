@@ -9,6 +9,7 @@ from math import sqrt
 
 
 
+
 from flask import Flask, render_template, redirect, flash, session, request
 import jinja2
 
@@ -17,27 +18,27 @@ import jinja2
 def get_allstocks_info(symbol):
     # """Takes in all stocks data by symbol and needs to give list of daily 'Close': '28.35' & mcap once(this is the last data pt)"""
 
-    close_price = cccccc.query.filter_by(symbol=symbol).all() #what is the data type of this?
+    # close_price = cccccc.query.filter_by(symbol=symbol).all() #what is the data type of this?
 
     #OR
     
-    for symbol in symbols:
+    # for symbol in symbols:
     # for each symbol
-    or close_price = db.session.query(cccccc.id, cccccc.Close).all()
-    & m_cap = db.session.query(cccccc.market_cap).one()
-    print "%s, %s" % (symbol.close_price, symbol.m_cap)
+    # or close_price = db.session.query(cccccc.id, cccccc.Close).all()
+    # & m_cap = db.session.query(cccccc.market_cap).one()
+    # print "%s, %s" % (symbol.close_price, symbol.m_cap)
 
 
-pass
+    pass
 
 #-------------------------------------------------------------
 # Fill in the following function or if function above works this may not be needed
 
 def get_past_prices(data):  
-    prices = data['']    
-    return prices
+    # prices = data['']    
+    # return prices
 
-pass
+    pass
 
 
 
@@ -47,7 +48,7 @@ pass
 #-------------------------------------------------------------
 def historical_returns(data):
 
-pass
+    pass
 
 # function to calculate daily returns , (daily close (t)- daily close(t-1))/ for 3 years 
 
@@ -82,14 +83,18 @@ def variance(data, xbar=None):
     >>> data = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5]
     >>> variance(data)
     1.3720238095238095    """
-
-    if iter(data) is data: #data is a collection object ,returns an iterator object
-        data = list(data) #creates list of the data
-	    n = len(data)
-    if n < 2:
-       raise StatisticsError('variance requires at least two data points')
-    T, ss = _ss(data, xbar) #sum of squares of stddev
-    return _convert(ss/(n-1), T)
+    
+    # if iter(data) is data:
+    # #data is a collection object ,returns an iterator object
+    #     data = list(data) 
+    #     #creates list of the data
+    #     n = len(data)
+    #     if n < 2:
+    #         raise StatisticsError('variance requires at least two data points')
+    #     T, ss = _ss(data, xbar) 
+    #     #sum of squares of stddev
+    # return _convert(ss/(n-1), T)
+    pass
 
 
 def stdev(data, xbar=None):

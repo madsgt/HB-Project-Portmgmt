@@ -39,11 +39,11 @@ def index():
 def user_data():
 #     """Return page showing text box with list of stocks to choose from a dropdown or autocomplete """
 
-#     stocks_list = stocks.get_all()
-#     return render_template("useractivity_capture.html",
-#                            stocks_list=stocks_list)
-#     or return redirect("/useractivity_capture.html")
-pass
+    stocks_list = stocks.get_all()
+    return render_template("useractivity_capture.html",
+                           stocks_list=stocks_list)
+    # or return redirect("/useractivity_capture.html")
+    pass
 #-----------------------------------------------------------------------------------------------
 
 # SIMILAR TO BELOW ROUTE SHOW USER THE LIST OF STOCKS ADDED FOR ANALYSIS
@@ -83,7 +83,7 @@ def add_to_list():
 
 #     return render_template("user_list.html", stock_list=stock_list, stock_total=stock_total)
 
-pass
+    pass
 
 #--------------------------------------------------------------------------------
 
@@ -111,7 +111,7 @@ def add_to_list(symbol):
     # # Redirect to shopping cart page
     # return redirect("/list")
 
-pass
+    pass
 
 #------------------------------------------------------------------------------------	
 
@@ -151,7 +151,7 @@ def stock_pie_data():
         #         "label": "Yellow Watermelon"
             }
 
-pass
+    pass
 # return jsonify(data_list_of_dicts)
 
 

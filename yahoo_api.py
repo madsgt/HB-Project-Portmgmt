@@ -6,6 +6,7 @@ import datetime #get the timestamp right
 import os # to access the os environment variables
 import urllib2
 import yahoo_finance
+from werkzeug.contrib.cache import FileSystemCache
 
 # from pandas.io.data import DataReader #to work with such time series in Python
 
@@ -31,7 +32,7 @@ def get_single_stock_data(ticker):
             'Volume': '16561900'}], '1.25B')}] """
 
 
-
+	
 	symbol = yahoo_finance.Share(ticker)
 	past_date = datetime.datetime.now() - datetime.timedelta(days=3*365)
 	str_past_date = datetime.datetime.strftime(past_date, "%Y-%m-%d")
@@ -54,6 +55,9 @@ def get_all_stock_data(tickers):
 		historicaldata.append(onequote)
 
 	return historicaldata
+
+# def ()
+
 
 
 if __name__=="__main__":
