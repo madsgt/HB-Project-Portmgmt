@@ -59,7 +59,7 @@ once the user enters info he is taken back or to user_list.html -->
 input.placeholder = "Loading symbols...";
 
 // Set up and make the request.
-request.open('GET', 'S&P500constituents.json', true);
+request.open('GET', '/tickers', true);
 request.send();
 # cant get the json to load 
 
@@ -122,32 +122,33 @@ request.send();
 
 <!-- Use a input range slider instead -->
 <tr>
-	<th>Risk Tolerance:</th>
-	<td>
-	<select>
-	  <option value="None"></option>		
-	  <option value="minimum">Risk Averse</option>
-	  <option value="neutral">Risk Neutral</option>
-	  <option value="risky">Risk Taker</option>
-	</select>
-	</td>
-</tr>
-<tr>
-	<th>Return Expectations:</th>
-	<td>
-	<select>
-	  <option value="None"></option>	
-	  <option value="atleast">Risk Averse</option>
-	  <option value="neutral">Risk Neutral</option>
-	  <option value="risky">Risk Taker</option>
-	</select>
-	</td>
-</tr>
+	
 
+<div>
+<th><label for="fader"><center>Risk Return Expectations</center></label></th>
 <br>
+<td><input type="range" min="0" max="100" value="Risk Neutral" id="fader" 
+	step="25" list="riskreturnsettings">
+	<center>
+	<datalist id="riskreturnsettings">
+	<option value="Risk Averse">Risk Averse</option>
+	<option value="Risk Neutral">Risk Neutral</option>
+	<option value="Normal Returns">Normal Returns</option>
+	<option value="Return Maximization">Return Maximization</option>
+</datalist>
+</td>
+</center>
+</div>
 
-  <tr><center><input type="submit" value="SUBMIT"></center> </tr>
-</div>3669999
+
+</tr>
+<center>
+  <tr>
+  	<td><center><input type="submit" value="SUBMIT"></center>
+  	</td>
+  	 </tr>
+  	 </center>
+</div>
 <!-- 
 
 	4) Another button for user to decide to go ahead

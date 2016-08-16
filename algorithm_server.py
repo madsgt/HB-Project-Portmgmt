@@ -8,7 +8,9 @@ Authors: Madhuri Ghosh.
 from flask import Flask, render_template, redirect, flash, session, request
 import jinja2
 import optimization
-
+import seed
+import yahoo_api
+import json
 
 
 app = Flask(__name__)
@@ -25,21 +27,25 @@ app.secret_key = 'this-should-be-something-unguessable'
 app.jinja_env.undefined = jinja2.StrictUndefined
 app.jinja_env.auto_reload = True
 
+
 @app.route("/")
 def index():
     """Return homepage."""
 
     return render_template("homepage.html")
 
-#------------------------------------------------------------------------------------    
+#-------------------------------------------------------------------------
+
+@app.route("/tickers")
 
 
-# Similar to below show list of stocks to select from by way of dropdown or autocomplete
+# Similar to below show list of stocks to select from by way of dropdown or 
+# autocomplete
 @app.route("/start")
 def user_data():
 #     """Return page showing text box with list of stocks to choose from a dropdown or autocomplete """
 
-    stocks_list = stocks.get_all()
+    stocks_list = Stock.get_all()
     return render_template("useractivity_capture.html",
                            stocks_list=stocks_list)
     # or return redirect("/useractivity_capture.html")
@@ -113,14 +119,14 @@ def add_to_list(symbol):
 
     pass
 
-#------------------------------------------------------------------------------------	
+#------------------------------------------------------------------------------------   
 
 
 
 @app.route("/final")
 def results():
-	"""Return page with results of the stock pie allocation in form of a pie chart"""
-	return render_template("results.html")
+    """Return page with results of the stock pie allocation in form of a pie chart"""
+    return render_template("results.html")
      
 
 
@@ -177,7 +183,7 @@ if __name__ == "__main__":
 
 connect_to_db(app)
 
-	# Use the DebugToolbar
+    # Use the DebugToolbar
 DebugToolbarExtension(app)
 
 app.run()

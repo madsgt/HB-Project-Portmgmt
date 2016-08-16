@@ -23,6 +23,13 @@ def load_stocks():
 
 	db.session.commit()
 
+
+
+def get_tickers():    
+    data = json.load(open("seed_data/S&P500constituents.json"))    
+    symbol, name, sector = data    
+    return json.dumps(data)
+
 #-------------------------------------------------------------
 
 def load_all_stock_data():
@@ -62,10 +69,11 @@ def load_favorites():
 
 if __name__ == "__main__":
 	connect_to_db(app)
-    db.create_all()
 
+	db.create_all()
 
-    Stock.query.delete() 
+	Stock.query.delete() 
 
-    load_stocks()
-    load_favorites()
+	load_stocks()
+	get_tickers()
+	load_favorites()
