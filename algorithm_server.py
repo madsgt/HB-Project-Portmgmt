@@ -36,25 +36,61 @@ def index():
 
 #-------------------------------------------------------------------------
 
-@app.route("/tickers")
-
-
 # Similar to below show list of stocks to select from by way of dropdown or 
-# autocomplete
-@app.route("/start")
-def user_data():
-#     """Return page showing text box with list of stocks to choose from a dropdown or autocomplete """
+# autocomplete, need help to get the tickers thru d json
+@app.route('/start', methods=['GET'])
+def user_form():
+    """Show form for user to fill in details."""
+    
+        return render_template("useractivity_capture.html")
 
-    stocks_list = Stock.get_all()
-    return render_template("useractivity_capture.html",
-                           stocks_list=stocks_list)
-    # or return redirect("/useractivity_capture.html")
-    pass
-#-----------------------------------------------------------------------------------------------
+
+@app.route('/start', methods=['POST'])
+def user_data():
+"""Return page showing text box with list of stocks to choose from a dropdown
+or autocomplete """
+    
+    stocklist = request.form.getlist('stocklist')
+    gender = request.form.getlist('gender')
+    agegroup = request.form.getlist('agegroup')
+    income = request.form.getlist('income')
+    amounttoinvest = request.form.getlist('amounttoinvest')
+    riskexpectation = request.form.getlist('riskexpectation')
+    returnexpectation = request.form.getlist('returnexpectation')
+
+    stockstring =""
+    for stock in stocklist:
+        stockstring = stockstring + stock + "&"
+
+
+    if len(stocklist)<2 or len(stocklist)>5:
+        flash("Please choose min 2 or max 5 symbols")
+        return redirect("/start")
+    else:
+        flash("Successfully added the stocks.")
+        return redirect("/list/%s" % stockstring)
+
+
+
+ 
+#----------------------------------------------------------------------------
 
 # SIMILAR TO BELOW ROUTE SHOW USER THE LIST OF STOCKS ADDED FOR ANALYSIS
-@app.route("/list")
-def add_to_list():
+@app.route("/list/<stockstring>")
+def show_list(stocklist):
+    """Show info of list of symbols selected"""
+
+    stocklist = stockstring.split("&")
+    symbol_info_list =[]
+    for symbol in stocklist:
+        symbol_info = Stock.query.get(symbol)
+        symbol_info_list.append(symbol_info)
+        print symbol_info
+   
+
+        
+    return render_template("user_list.html", symbol_info_list=symbol_info_list)
+
 
 #     """Add the list of stocks and display the information."""
 
@@ -87,19 +123,20 @@ def add_to_list():
 #     # Get the melon-info dictionaries from our cart
 #     stock_list = stock_list.values()
 
-#     return render_template("user_list.html", stock_list=stock_list, stock_total=stock_total)
+#     return render_template("user_list.html", stock_list=stock_list, stock_
+    # total=stock_total)
 
-    pass
+
 
 #--------------------------------------------------------------------------------
 
-@app.route("/add_to_list/<string:symbol>")
-def add_to_list(symbol):
-    """Add a stock to list and redirect to user_list.html.
+# @app.route("/add_to_list/<string:symbol>")
+# def add_to_list(symbol):
+#     """Add a stock to list and redirect to user_list.html.
 
-    # When a stock is added to the list, redirect browser to the user_list
-    # page and display a confirmation message: 'Successfully added to list'.
-    # """
+#     # When a stock is added to the list, redirect browser to the user_list
+#     # page and display a confirmation message: 'Successfully added to list'.
+#     # """
 
     # # Check if we have a stock_list in the session dictionary and, if not, add one
     # if 'stock_list' in session:
@@ -126,29 +163,43 @@ def add_to_list(symbol):
 @app.route("/final")
 def results():
     """Return page with results of the stock pie allocation in form of a pie chart"""
-    return render_template("results.html")
+    """ get stocklist out of the form and send stocklist to results.html"""
+
+    # request.form.getlist()
+
+
+
+    
+    return render_template("results.html", stocklist=stocklist)
+
+   
      
 
 
 @app.route("/final.json")
 def stock_pie_data():
     """Return data about the stocks."""
+ #ajax request , REQUEST.ARGS.GET (GET THE STOCKLIST OUT)
 
+    get_all_stock_data(stocklist)
+    optimal_portfolio(returns)
+    # the weights will be a list and make it a dictionary and 
     data_list_of_dicts = {
-
+    # use for loop later to pick up 2 upto 5 symbols
+    # 
     # Need to add infor from calculations of weights from Optimization.py file
         # 'stocks': [
         #     {
-        #         "value": 300,
+        #         "value": 15,
         #         "color": "#F7464A",
         #         "highlight": "#FF5A5E",
-        #         "label": "Christmas Melon"
+        #         "label": symbol1
         #     },
         #     {
         #         "value": 50,
         #         "color": "#46BFBD",
         #         "highlight": "#5AD3D1",
-        #         "label": "Crenshaw"
+        #         "label": symbol2
         #     },
         #     {
         #         "value": 100,
@@ -159,6 +210,8 @@ def stock_pie_data():
 
     pass
 # return jsonify(data_list_of_dicts)
+
+# DATA_LIST_OF_DICTS GETS PASSED IN DATA IN js
 
 
 

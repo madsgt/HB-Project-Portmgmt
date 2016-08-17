@@ -5,6 +5,7 @@ import numpy
 from cvxopt import matrix, solvers, blas
 import pandas as pd 
 from math import sqrt
+import yahoo_api
 
 
 
@@ -14,7 +15,7 @@ from flask import Flask, render_template, redirect, flash, session, request
 import jinja2
 
 #-------------------------------------------------------------
-#query the db for daily prices . DEFINE THIS
+#query the db for daily prices . DEFINE THIS, keep for sprint 2
 def get_allstocks_info(symbol):
     # """Takes in all stocks data by symbol and needs to give list of daily 'Close': '28.35' & mcap once(this is the last data pt)"""
 
@@ -34,6 +35,7 @@ def get_allstocks_info(symbol):
 
 #-------------------------------------------------------------
 def historical_returns(data):
+
 
     pass
 

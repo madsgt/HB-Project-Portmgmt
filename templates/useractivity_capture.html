@@ -4,7 +4,7 @@
 
 <!-- Not sure if I need a form action or a form class, this will capture all the info user enters in the form
 once the user enters info he is taken back or to user_list.html -->
-<form action="/user_list.html">
+<form action="/start" method="POST">
 <div class="row">
 <table border="0" cellspacing="4" cellpadding="0">
 	<tbody>
@@ -15,8 +15,64 @@ once the user enters info he is taken back or to user_list.html -->
 			</td>
 		</tr>
 	<tr> <p><center>Choose your Stock Symbol: </center></p><br></tr>
+	<center><p>Note: You may choose minimum 2 and maximum 5 symbols</p></center>
+	<tr>
+	<th>Stocks List:</th>
+	<td>
+<!-- 	<input type="checkbox" name="stock" value="GOOG"> GOOG<br>
+  	<input type="checkbox" name="stock" value="YHOO"> YHOO<br> -->
+	<select name="stocklist" multiple>
+	  <option value="GOOG">GOOG</option>
+	  <option value="YHOO">YHOO </option>
+	  <option value="AA">AA</option>
+	  <option value="ABT">ABT</option>
+	  <option value="EL">EL</option>
+	  <option value="BA">BA</option>
+	  <option value="GIS">GIS</option>
+	  <option value="COST">COST</option>
+	  <option value="C">C</option>
+	  <option value="PEP">PEP</option>
+	  <option value="AAPL">AAPL</option>
+	  <option value="FDX">FDX</option>
+	  
+	</select>
+	<!-- <input type="submit" id="addbutton" value="ADD" /> -->
+	<center><p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p></center>
+	</td>
+	</tr>
+	
+	</div>
+
 	<!-- we start with <input> and <datalist> elements. Ensure that you link the two using the id and list attributes. -->
-    
+    <!--div id="page-wrapper">
+  <h1>Stock list Autocomplete Demo</h1>
+  
+  <label for="default">Pick a stock</label>
+  <input type="text" id="default" list="languages" placeholder="e.g. GOOG">
+  
+  <datalist id="stocks">
+    <option value="GOOG">
+    <option value="AA">
+    <option value="PEP">
+    <option value="BA">
+    <option value="YHOO">
+    <option value="C">
+    <option value="COST">
+    <option value="EL">
+    <option value="GIS">
+    <option value="ABT">
+    <option value="ABBV">
+    <option value="AAPL">
+  </datalist>
+  
+  
+  <label for="ajax">Pick a Stock Symbol </label>
+  <input type="text" id="ajax" list="json-datalist" placeholder="e.g. datalist">
+  <datalist id="json-datalist"></datalist>
+
+  
+</div>
+
 	<div class="fieldwrapper">
     <tr><center><input type="text" id="ajax" list="json-datalist" placeholder="e.g. GOOG">
     	<input type="submit" id="addbutton" value="ADD" />
@@ -59,38 +115,41 @@ once the user enters info he is taken back or to user_list.html -->
 input.placeholder = "Loading symbols...";
 
 // Set up and make the request.
-request.open('GET', '/tickers', true);
+request.open('GET','S&P500constituents.json', true);
 request.send();
-# cant get the json to load 
+
+</script>
+</div> -->
 
 
 
-</script> 
-</div>
-<br>
-<center><p>Note: You may choose minimum 2 and maximum 5 symbols</p></center>
 
-<div>
-<tr>
-	<p><center>Kindly help us with some additional information:</center>
-	</p></tr>
+
+
+
+	<tr>
+	<td>
+	<center><p>Kindly help us with some additional information below:
+	</p></center>
+	</td>
+	</tr>
 <tr>
 	<th>Age Group:</th>
 	<td>
-	<select>
-	  <option value="None"></option>	
+	<select name="agegroup">
+	  <option value="" style="display:none;"></option>		
 	  <option value="young">20-30 Years</option>
 	  <option value="midage">30-45 Years </option>
 	  <option value="mature">45-60 Years</option>
-	  <option value="old">>60 Years</option>
+	  <option value="old">60 Years</option>
 	</select>
 	</td>
 </tr>
 <tr>	
 	<th>Gender:</th>
 	<td>
-	<select>
-	  <option value="None"></option>
+	<select name="gender">
+	  <option value="" style="display:none;"></option>	
 	  <option value="male">Male</option>
 	  <option value="female">Female</option>
 	</select>
@@ -99,36 +158,59 @@ request.send();
 </tr>
 	<th>Annual Income Range:</th>
 	<td>
-	<select>
-	  <option value="None"></option>	
+	<select name="income">
+	  <option value="" style="display:none;"></option>		
 	  <option value="median">$45-$80 K</option>
 	  <option value="average">$80-$120 K</option>
 	  <option value="high">$120-$200 K</option>
-	  <option value="rich">>$200 K</option>
+	  <option value="rich">$200 K</option>
 	</select>
 	</td>
 </tr>
 <tr>
 	<th>Investible Surplus:</th>
 	<td>
-	<select>
-	  <option value="None"></option>		
+	<select name="amounttotinvest">
+	  <option value="" style="display:none;"></option>		
 	  <option value="low">$1-$5 K</option>
 	  <option value="medium">$5-$10 K</option>
-	  <option value="above">>$10 K</option>
+	  <option value="above">$10 K</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<th>Risk Expectations:</th>
+	<td>
+	<select name="riskexpectation">
+	  <option value="" style="display:none;"></option>		
+	  <option value="low">Risk Averse</option>
+	  <option value="medium">Risk Neutral</option>
+	  <option value="above">Risk Taker</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<th>Return Expectations:</th>
+	<td>
+	<select name="returnexpectation">
+	  <option value="" style="display:none;"></option>		
+	  <option value="low">Normal Return</option>
+	  <option value="medium">Above Normal Return</option>
+	  <option value="above">Return Maximization</option>
 	</select>
 	</td>
 </tr>
 
-<!-- Use a input range slider instead -->
-<tr>
+
+<!-- Use a input range slider instead but in sprint 2 -->
+<!-- <tr>
 	
 
 <div>
 <th><label for="fader"><center>Risk Return Expectations</center></label></th>
 <br>
-<td><input type="range" min="0" max="100" value="Risk Neutral" id="fader" 
-	step="25" list="riskreturnsettings">
+<td><input type="range" min="0" max="10" value="5" id="fader" 
+	step="2.5" list="riskreturnsettings">
 	<center>
 	<datalist id="riskreturnsettings">
 	<option value="Risk Averse">Risk Averse</option>
@@ -138,7 +220,7 @@ request.send();
 </datalist>
 </td>
 </center>
-</div>
+</div>-->
 
 
 </tr>
@@ -148,7 +230,7 @@ request.send();
   	</td>
   	 </tr>
   	 </center>
-</div>
+
 <!-- 
 
 	4) Another button for user to decide to go ahead

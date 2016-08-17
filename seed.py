@@ -25,10 +25,10 @@ def load_stocks():
 
 
 
-def get_tickers():    
-    data = json.load(open("seed_data/S&P500constituents.json"))    
-    symbol, name, sector = data    
-    return json.dumps(data)
+# def get_tickers():    
+#     data = json.load(open("seed_data/S&P500constituents.json"))    
+#     symbol, name, sector = data    
+#     return json.dumps(data)
 
 #-------------------------------------------------------------
 

@@ -15,6 +15,8 @@
 </script>
 
 
+<!-- ADD A HIDDEN HTML ELEMENT THAT CONTAINS THE STOCKLIST AND USE JINJA TO PUT IT IN -->
+
 <h2> Stock Pie </h2>
  <!--Div that will hold the pie chart-->
 <div class="stock-chart">
@@ -29,7 +31,8 @@
 
     // Make Donut Chart of percent of different types of Melons
     var ctx_donut = $("#donutChart").get(0).getContext("2d");
-
+    /*USE JQUERY TO GET THE STOCKLIST OUT OF THE HTML (SELECT ELEMENTS)
+    PASS THE STOCK LIST IN .GET KEY IS STOCKLIST AND VALUE STOCKLIST (AJAX LECTURE)*/
     $.get("/final.json", function (data) {
       var myDonutChart = new Chart(ctx_donut).Doughnut(data.xxxxx, options);
       $('#donutLegend').html(myDonutChart.generateLegend());
