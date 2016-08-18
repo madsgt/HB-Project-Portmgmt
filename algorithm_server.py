@@ -5,13 +5,14 @@ Provides web interface for stock allocation.
 Authors: Madhuri Ghosh.
 """
 
-from flask import Flask, render_template, redirect, flash, session, request
+from flask import Flask, render_template, redirect, flash, session, request, jsonify, make_response, g
 import jinja2
+
 import optimization
-import seed
 import yahoo_api
 import json
-
+from data_model import Stock, YahooData, UserData, connect_to_db, db
+from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
 
@@ -42,21 +43,27 @@ def index():
 def user_form():
     """Show form for user to fill in details."""
     
-        return render_template("useractivity_capture.html")
+    return render_template("useractivity_capture.html")
 
 
 @app.route('/start', methods=['POST'])
 def user_data():
-"""Return page showing text box with list of stocks to choose from a dropdown
-or autocomplete """
-    
+    """Return page showing text box with list of stocks to choose from a 
+    dropdown or autocomplete."""
+
     stocklist = request.form.getlist('stocklist')
-    gender = request.form.getlist('gender')
-    agegroup = request.form.getlist('agegroup')
-    income = request.form.getlist('income')
-    amounttoinvest = request.form.getlist('amounttoinvest')
-    riskexpectation = request.form.getlist('riskexpectation')
-    returnexpectation = request.form.getlist('returnexpectation')
+    gender = request.form.get('gender')
+    agegroup = request.form.get('agegroup')
+    income = request.form.get('income')
+    amounttoinvest = request.form.get('amounttoinvest')
+    riskexpectation = request.form.get('riskexpectation')
+    returnexpectation = request.form.get('returnexpectation')
+    g.gender = gender
+    g.agegroup = agegroup
+    g.income = income
+    g.amounttoinvest = amounttoinvest
+    g.riskexpectation = riskexpectation
+    g.returnexpectation = returnexpectation
 
     stockstring =""
     for stock in stocklist:
@@ -67,12 +74,14 @@ or autocomplete """
         flash("Please choose min 2 or max 5 symbols")
         return redirect("/start")
     else:
-        flash("Successfully added the stocks.")
+        flash("Successfully added the information.")
+
         return redirect("/list/%s" % stockstring)
 
 
 
- 
+
+
 #----------------------------------------------------------------------------
 
 # SIMILAR TO BELOW ROUTE SHOW USER THE LIST OF STOCKS ADDED FOR ANALYSIS
@@ -81,107 +90,56 @@ def show_list(stocklist):
     """Show info of list of symbols selected"""
 
     stocklist = stockstring.split("&")
-    symbol_info_list =[]
+    symbol_info_list = []
     for symbol in stocklist:
         symbol_info = Stock.query.get(symbol)
         symbol_info_list.append(symbol_info)
-        print symbol_info
-   
+        print symbol_info_list
 
-        
     return render_template("user_list.html", symbol_info_list=symbol_info_list)
 
 
-#     """Add the list of stocks and display the information."""
-
-#     stock_total = 0
-
-#     # Get the stock_list (or an empty list if there's no stock_list yet)
-#     add_stocks = session.get('stock_list', [])
-
-#     # We'll use this dictionary to keep track of the symbols
-#     # we have in the stock_list.
-#     #
-#     # Format: symbol -> {dictionary-of-stock_list-info}
-
-#     stock_list = {}
-
-#     # Loop over the symbols in the session stock_list to build up the
-#     # `stock_list` dictionary
-
-#     for symbol in add_stocks:
-
-#         if symbol in stock_list:
-#             stock_list_info = stock_list[symbol]= {
-#                 'symbol': ccccccc.symbol,
-#                 'count': 0,
-#                   }
-
-#         # increase  stock-total count
-#         stock_list_info['stock_total'] += 1
-#      
-#     # Get the melon-info dictionaries from our cart
-#     stock_list = stock_list.values()
-
-#     return render_template("user_list.html", stock_list=stock_list, stock_
-    # total=stock_total)
 
 
-
-#--------------------------------------------------------------------------------
-
-# @app.route("/add_to_list/<string:symbol>")
-# def add_to_list(symbol):
-#     """Add a stock to list and redirect to user_list.html.
-
-#     # When a stock is added to the list, redirect browser to the user_list
-#     # page and display a confirmation message: 'Successfully added to list'.
-#     # """
-
-    # # Check if we have a stock_list in the session dictionary and, if not, add one
-    # if 'stock_list' in session:
-    #     stock_list = session['stock_list']
-
-    # else:
-    #     stock_list = session['stock_list'] = []
-
-    # # Add stock to stock_list
-    # stock_list.append(symbol)
-
-    # # Show user success message on next page load
-    # flash("Successfully added to list.")
-
-    # # Redirect to shopping cart page
-    # return redirect("/list")
-
-    pass
-
-#------------------------------------------------------------------------------------   
-
-
-
-@app.route("/final")
+@app.route("/final", methods=["POST"])
 def results():
-    """Return page with results of the stock pie allocation in form of a pie chart"""
     """ get stocklist out of the form and send stocklist to results.html"""
 
     # request.form.getlist()
+    symbol_list = []
+    symbol = request.form.get('symbol')
+    symbol_list.append(symbol)
+    gender = request.form.get('gender')
+    agegroup = request.form.get('agegroup')
+    income = request.form.get('income')
+    amounttoinvest = request.form.get('amounttoinvest')
+    riskexpectation = request.form.get('riskexpectation')
+    returnexpectation = request.form.get('returnexpectation')
 
+    userdata = UserData(gender=gender, agegroup=agegroup, income=income, 
+        amounttoinvest=amounttoinvest, riskexpectation=riskexpectation, 
+        returnexpectation=returnexpectation)
+    db.session.add(userdata) # add to the session for storing
 
+    db.session.commit()
 
+    yahooapidata = get_all_stock_data(symbol_list)
     
-    return render_template("results.html", stocklist=stocklist)
+    return render_template("results.html", symbol_list=symbol_list)
 
    
-     
+    # need to send the stocklist to yahoo_api.py and that data to optimization
 
 
 @app.route("/final.json")
 def stock_pie_data():
-    """Return data about the stocks."""
+    """Return page with results of the stock pie allocation in form of a
+    pie chart."""
  #ajax request , REQUEST.ARGS.GET (GET THE STOCKLIST OUT)
 
     get_all_stock_data(stocklist)
+
+    
     optimal_portfolio(returns)
     # the weights will be a list and make it a dictionary and 
     data_list_of_dicts = {
@@ -234,9 +192,9 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
 
 
-connect_to_db(app)
+    connect_to_db(app)
 
     # Use the DebugToolbar
-DebugToolbarExtension(app)
+    DebugToolbarExtension(app)
 
-app.run()
+    app.run()

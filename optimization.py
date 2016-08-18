@@ -6,6 +6,7 @@ from cvxopt import matrix, solvers, blas
 import pandas as pd 
 from math import sqrt
 import yahoo_api
+import algorithm_server
 
 
 
@@ -35,7 +36,15 @@ def get_allstocks_info(symbol):
 
 #-------------------------------------------------------------
 def historical_returns(data):
+    """this function will calculate daily returns for the 3 yrs for a stock symbol"""
+    """the data input here are dictionaries that looks like below and for each symbol we 
+    need to loop  
+   
+    {'GOOG': ['777.140015', '782.440002', '783.219971', '784.849976', '784.679993']}
+    {'YHOO': ['42.490002', '42.669998', '42.939999', '41.27', '39.93', '39.240002']} """
 
+
+    # for symbol in 
 
     pass
 

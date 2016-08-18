@@ -3,7 +3,7 @@
 import datetime
 import sqlalchemy
 
-from data_model import Stock, Favorite, connect_to_db, db
+from data_model import Stock, YahooData, UserData, connect_to_db, db
 
 from algorithm_server import app
 
@@ -45,22 +45,22 @@ def load_all_stock_data():
 
 def load_favorites():
 
-	"""Load counter + symbols from user clicks into database, keep the counter ticking"""
+	# """Load counter + symbols from user clicks into database, keep the counter ticking"""
 
-	print "Favorites"
+	# print "Favorites"
 
-	# Need help on this, created dummy data, how will I create the counter, as user clicks the counter adds
+	# # Need help on this, created dummy data, how will I create the counter, as user clicks the counter adds
 
-	for i, row in enumerate(open("seed_data/dummy_clicks.csv")):
-		row = row.rstrip()
-		symbol, counter = row.split(",")
+	# for i, row in enumerate(open("seed_data/dummy_clicks.csv")):
+	# 	row = row.rstrip()
+	# 	symbol, counter = row.split(",")
 
-		counter = Favorite(symbol=symbol, counter=counter)
-		db.session.add(counter)
+	# 	counter = Favorite(symbol=symbol, counter=counter)
+	# 	db.session.add(counter)
 
-	db.session.commit()
+	# db.session.commit()
 
-
+	pass
 
 
 
@@ -75,5 +75,4 @@ if __name__ == "__main__":
 	Stock.query.delete() 
 
 	load_stocks()
-	get_tickers()
 	load_favorites()

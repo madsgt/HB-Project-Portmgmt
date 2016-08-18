@@ -9,11 +9,12 @@ th {
     font-weight: normal;
 }
 
+
 body {
-	  font-size: 2em;
-	  background-color: grey;
-	  color: blue;
-      text-align: center;
+    background-size: cover;
+
+    color: white;
+    text-align: center;
 }
 
 h1 {
@@ -41,13 +42,9 @@ p.error {
 }
 
 #footer {
-	position: relative;
-	left: 0;
-    bottom:0;
-    border: 1px solid grey;
-    width:100%;
-    bottom:0;
-    padding:1px 0;
-	color: black;
-
+    position: fixed;
+    bottom: 0;
+    width: 100%;  /* required because fixed position */
 }
+
+

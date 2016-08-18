@@ -4,8 +4,9 @@
 
 <!-- User List of Stocks displayed and asks them to either go ahead or go back , once they decide to go ahead
 we go to results.html page -->
-
+<form action="/final" method="POST">
 <table class="table table-striped">
+    <center><p>Please review your list of stocks chosen. Would you like to proceed?</p></center>
         <thead>
         <tr>
             <th>Symbol</th>
@@ -14,25 +15,40 @@ we go to results.html page -->
             </tr>
         </thead>
         <tbody>
-        	{% for stock in stocklist %}
+        	{% for stock in symbol_info_list %}
         <tr>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-            <td>{{ stock['symbol'] }}</td>
-            <td>{{ stock['name'] }}</td>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.name }}</td>
+            <td>{{ stock.sector }}</td>
+        </tr>
 
+           {% endfor %}
+        <tr>
+            <td>Gender: {{ g.gender }} </td>
+            <td>Age Group: {{ g.agegroup }} </td>
+            <td>Income: {{ g.income }} </td>
+            <td>Amount to Invest: {{ g.amounttoinvest }} </td>
+            <td>Risk Expectation: {{ g.riskexpectation }} </td>
+            <td>Return Expectation: {{ g.returnexpectation }} </td>
+        </tr>            
 
-
-
-
-
-       
+      
             <div id="frm">
-            Involved: 
+           
             <form action='/start'>
             <input type="submit" value="Go Back"> <!--To Return to Previous Page  -->
             </form>
              <p>OR</p>    
-            <form action='/final'>
+            <form action='/final' method="POST">
+                 <!--hidden form inputs, do we need a for loop to collect symbols-->
+                <input type="hidden" id="symbol" name="symbol" value=''>
+                <input type="hidden" id="gender" name="gender" value=''>
+                <input type="hidden" id="agegroup" name="agegroup" value=''>
+                <input type="hidden" id="income" name="income" value=''>
+                <input type="hidden" id="amounttoinvest" name="amounttoinvest" value=''>
+                <input type="hidden" id="riskexpectation" name="riskexpectation" value=''>
+                <input type="hidden" id="returnexpectation" name="returnexpectation" value=''>
                 <!-- <input =hidden input check web pattern lecture -->
             <input type="submit" value="Go for It">  <!--To move to results Page  --> 
             </form>

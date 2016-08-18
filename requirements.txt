@@ -3,6 +3,7 @@ blinker==1.4
 bpython==0.15
 cffi==1.7.0
 click==6.6
+coverage==4.2
 cryptography==1.4
 curtsies==0.2.6
 CVXcanon==0.1.0
