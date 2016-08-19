@@ -1,8 +1,8 @@
 Symbol,Name,Sector,
 MMM,3M Company,Industrials,
 ABT,Abbott Laboratories,Health Care,
-ABBV,AbbVie,Health Care
-,ACN,Accenture plc,Information Technology,
+ABBV,AbbVie,Health Care,
+ACN,Accenture plc,Information Technology,
 ATVI,Activision Blizzard,Information Technology,
 AYI,Acuity Brands Inc,Industrials,
 ADBE,Adobe Systems Inc,Information Technology,
@@ -31,7 +31,7 @@ AMZN,Amazon.com Inc,Consumer Discretionary
 AAL,American Airlines Group,Industrials
 ,AEP,American Electric Power,Utilities
 ,AXP,American Express Co,Financials,
-AIG,"American International Group, Inc.",Financials
+AIG,American International Group Inc.,Financials
 ,AMT,American Tower Corp A,Financials,
 AWK,American Water Works Company Inc,Utilities,
 AMP,Ameriprise Financial,Financials,
@@ -40,7 +40,7 @@ AME,Ametek,Industrials,
 AMGN,Amgen Inc,Health Care
 ,APH,Amphenol Corp A,Industrials,
 APC,Anadarko Petroleum Corp,Energy,
-ADI,"Analog Devices, Inc.",Information Technology,
+ADI,Analog Devices Inc.,Information Technology,
 ANTM,Anthem Inc.,Health Care,
 AON,Aon plc,Financials,
 APA,Apache Corporation,Energy
@@ -56,7 +56,7 @@ ADP,Automatic Data Processing,Information Technology,
 AN,AutoNation Inc,Consumer Discretionary
 ,AZO,AutoZone Inc,Consumer Discretionary,
 AVGO,Avago Technologies,Information Technology,
-AVB,"AvalonBay Communities, Inc.",Financials,
+AVB,AvalonBay Communities Inc.,Financials,
 AVY,Avery Dennison Corp,Materials,
 BHI,Baker Hughes Inc,Energy
 ,BLL,Ball Corp,Materials
@@ -78,7 +78,7 @@ BSX,Boston Scientific,Health Care,
 BMY,Bristol-Myers Squibb,Health Care,
 BF-B,Brown-Forman Corporation,Consumer Staples
 ,CHRW,C. H. Robinson Worldwide,Industrials,
-CA,"CA Inc.",Information Technology,
+CA,CA Inc.,Information Technology,
 COG,Cabot Oil & Gas,Energy
 ,CPB,Campbell Soup,Consumer Staples,
 COF,Capital One Financial,Financials,
@@ -391,7 +391,7 @@ ROP,Roper Industries,Industrials,
 ROST,Ross Stores,Consumer Discretionary,
 RCL,Royal Caribbean Cruises Ltd,Consumer Discretionary,
 R,Ryder System,Industrials,
-SPGI,"S&P Global, Inc.",Financials
+SPGI,S&P Global Inc.,Financials
 ,CRM,Salesforce.com,Information Technology
 ,SCG,SCANA Corp,Utilities,
 SLB,Schlumberger Ltd.,Energy
@@ -459,9 +459,9 @@ UNP,Union Pacific,Industrials,
 UAL,United Continental Holdings,Industrials,
 UNH,United Health Group Inc.,Health Care,
 UPS,United Parcel Service,Industrials,
-URI,"United Rentals, Inc.",Industrials,
+URI,United Rentals Inc.,Industrials,
 UTX,United Technologies,Industrials,
-UHS,"Universal Health Services, Inc.",Health Care,
+UHS,Universal Health Services Inc.,Health Care,
 UNM,Unum Group,Financials,
 URBN,Urban Outfitters,Consumer Discretionary,
 VFC,V.F. Corp.,Consumer Discretionary,

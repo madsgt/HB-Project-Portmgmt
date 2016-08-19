@@ -65,9 +65,9 @@ def user_data():
     g.riskexpectation = riskexpectation
     g.returnexpectation = returnexpectation
 
-    stockstring =""
+    stockstring = stocklist[0]
     for stock in stocklist:
-        stockstring = stockstring + stock + "&" 
+        stockstring = stockstring + "&" + stock
 
 
     if len(stocklist)<2 or len(stocklist)>5:
@@ -125,8 +125,9 @@ def results():
     db.session.commit()
 
     yahooapidata = yahoo_api.get_all_stock_data(symbol_list)
-    historicalreturns = optimization.historical_returns(yahooapidata)    
-    portfolio = optimization.optimal_portfolio(historicalreturns) 
+    historicalreturns = optimization.historical_returns(yahooapidata)
+    portfolio = optimal_portfolio([[-0.00355164, -0.00491801],[ 0.00681986,  0.0042362 ]])    
+    # portfolio = optimization.optimal_portfolio(historicalreturns) 
     
     return render_template("results.html", symbol_list=symbol_list)
     # not sure of passing yahooapidata in render template
@@ -194,12 +195,8 @@ def stock_pie_data():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
-
-
     connect_to_db(app)
-
     # Use the DebugToolbar
     DebugToolbarExtension(app)
+    app.run(host="0.0.0.0", debug=True)
 
-    app.run()

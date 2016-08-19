@@ -5,7 +5,7 @@ import sqlalchemy
 
 from data_model import Stock, YahooData, UserData, connect_to_db, db
 
-from algorithm_server import app
+
 
 
 def load_stocks():
@@ -14,8 +14,14 @@ def load_stocks():
 	print "Stocks"
 
 	for i, row in enumerate(open("seed_data/S&P500constituents.csv")):
+		if row[0] == "," :
+			row = row[1:]	
 		row = row.rstrip()
-		symbol, name, sector = row.split(",")
+		split = row.split(",")
+
+		symbol = split[0]
+		name =split[1]
+		sector = split[2]
 
 		stock = Stock(symbol=symbol, name=name, sector=sector)
 
@@ -68,9 +74,12 @@ def load_favorites():
 
 
 if __name__ == "__main__":
+	from algorithm_server import app
 	connect_to_db(app)
 
 	db.create_all()
+
+
 
 	Stock.query.delete() 
 

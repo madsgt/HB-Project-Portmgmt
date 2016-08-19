@@ -6,7 +6,8 @@ from cvxopt import matrix, solvers, blas
 import pandas as pd 
 from math import sqrt
 import yahoo_api
-import algorithm_server
+
+import utils
 
 
 
@@ -14,25 +15,6 @@ import algorithm_server
 
 from flask import Flask, render_template, redirect, flash, session, request
 import jinja2
-
-#-------------------------------------------------------------
-#query the db for daily prices . DEFINE THIS, keep for sprint 2
-def get_allstocks_info(symbol):
-    # """Takes in all stocks data by symbol and needs to give list of daily 'Close': '28.35' & mcap once(this is the last data pt)"""
-
-    # adj_close_price = cccccc.query.filter_by(symbol=symbol).all() #what is the data type of this?
-
-    #OR
-    
-    # for symbol in symbols:
-    # for each symbol
-    # or adj_close_price = db.session.query(cccccc.id, cccccc.adj_close).all()
-    # print "%s, %s" % (symbol.adj_close)
-
-
-    pass
-
-
 
 #-------------------------------------------------------------
 def historical_returns(yahooapidata):
@@ -63,9 +45,9 @@ def historical_returns(yahooapidata):
                 return_values.append(returns)
             new_dict[key] = return_values
            
-    return_vec_array = numpy.array([new_dict.values()])
+    return_vec_array = numpy.array([new_dict.values()]) # creates an array of symbol returns, with symbols as rows and the returns as columns
     return_vec = return_vec_array.T # I need matrix for all dictionaries together
-    return [return_values, return_vec]
+    return return_vec
 
 # I expect returns to be multiple dictionaries here with key as symbol and values are the returns
 # work on getting return_vec to sow in the right form of array and get it to the next function
@@ -77,7 +59,7 @@ def historical_returns(yahooapidata):
 
 def optimal_portfolio(returns):
 
-    # return_values, return_vec = historical_returns()
+    # return_vec = historical_returns()
 
     n = len(returns)
     returns = numpy.asmatrix(returns)
@@ -114,3 +96,7 @@ def optimal_portfolio(returns):
 
 
 # optimal_portfolio([[-0.00355164, -0.00491801],[ 0.00681986,  0.0042362 ]])
+
+if __name__ == "__main__":
+    import algorithm_server
+    
