@@ -7,7 +7,7 @@ import os # to access the os environment variables
 import urllib2
 import yahoo_finance
 from werkzeug.contrib.cache import FileSystemCache
-import optimization
+# import optimization
 # from pandas.io.data import DataReader #to work with such time series in Python
 
 # make a printer
@@ -40,7 +40,7 @@ def get_single_stock_data(ticker):
     ticker_data = symbol.get_historical(str_past_date, str_today_date)
 
     data_needed = [result['Adj_Close'] for result in ticker_data if 'Adj_Close' in result]
-    print {ticker: data_needed}
+    return {ticker: data_needed}
 
 
 
@@ -56,11 +56,11 @@ def get_all_stock_data(tickers):
         onequote = get_single_stock_data(ticker)
         historicaldata.append(onequote)
 
-    historicalreturns = optimization.historical_returns(historicaldata)    
-    portfolio = optimization.optimal_portfolio(historicalreturns) 
+    # historicalreturns = optimization.historical_returns(historicaldata)    
+    # portfolio = optimization.optimal_portfolio(historicalreturns) 
       
-    return portfolio
-
+    # return portfolio
+    return historicaldata
 
 
 

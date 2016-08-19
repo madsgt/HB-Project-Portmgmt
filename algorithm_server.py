@@ -67,7 +67,7 @@ def user_data():
 
     stockstring =""
     for stock in stocklist:
-        stockstring = stockstring + stock + "&"
+        stockstring = stockstring + stock + "&" 
 
 
     if len(stocklist)<2 or len(stocklist)>5:
@@ -86,9 +86,10 @@ def user_data():
 
 # SIMILAR TO BELOW ROUTE SHOW USER THE LIST OF STOCKS ADDED FOR ANALYSIS
 @app.route("/list/<stockstring>")
-def show_list(stocklist):
+def show_list(stockstring):
     """Show info of list of symbols selected"""
 
+    
     stocklist = stockstring.split("&")
     symbol_info_list = []
     for symbol in stocklist:
@@ -123,10 +124,12 @@ def results():
 
     db.session.commit()
 
-    yahooapidata = get_all_stock_data(symbol_list)
+    yahooapidata = yahoo_api.get_all_stock_data(symbol_list)
+    historicalreturns = optimization.historical_returns(yahooapidata)    
+    portfolio = optimization.optimal_portfolio(historicalreturns) 
     
     return render_template("results.html", symbol_list=symbol_list)
-
+    # not sure of passing yahooapidata in render template
    
     # need to send the stocklist to yahoo_api.py and that data to optimization
 
@@ -137,11 +140,13 @@ def stock_pie_data():
     pie chart."""
  #ajax request , REQUEST.ARGS.GET (GET THE STOCKLIST OUT)
 
-    get_all_stock_data(stocklist)
+   
+      
+    return portfolio
 
     
-    optimal_portfolio(returns)
-    # the weights will be a list and make it a dictionary and 
+    # the weights will be a list and make it a dictionary and pass it below
+
     data_list_of_dicts = {
     # use for loop later to pick up 2 upto 5 symbols
     # 

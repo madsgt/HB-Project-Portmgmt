@@ -75,4 +75,4 @@ if __name__ == "__main__":
 	Stock.query.delete() 
 
 	load_stocks()
-	load_favorites()
+	# load_favorites()

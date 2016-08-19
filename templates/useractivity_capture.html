@@ -5,22 +5,22 @@
 <!-- Not sure if I need a form action or a form class, this will capture all the info user enters in the form
 once the user enters info he is taken back or to user_list.html -->
 <form action="/start" method="POST">
-<div class="row">
+<!-- <div class="row"> -->
 <table border="0" cellspacing="4" cellpadding="0">
+	<table style="width:100%">
 	<tbody>
-		<tr bgcolor="#6699cc">
-			<td colspan="4">
-				<table style="width:100%" border="0" cellspacing="0" cellpadding="4">
-					<b><font face="arial" size="+2"><center>Pick Your Stocks.</center></font></b>
-			</td>
-		</tr>
-	<tr> <p><center>Choose your Stock Symbol: </center></p><br></tr>
-	<center><p>Note: You may choose minimum 2 and maximum 5 symbols</p></center>
+		<!-- <tr bgcolor="#6699cc"> -->
+			<!-- <td colspan="4"> -->
+				<!-- <table style="width:100%" border="0" cellspacing="0" cellpadding="4"> -->
+	<b><font face="arial" size="+2"><center>Pick Your Stocks.</center></font></b><br>
+	<p><center>Choose your Stock Symbol: <br>
+		Note: You may choose minimum 2 and maximum 5 symbols</center></p>
+			<!-- </td> -->
+		<!-- </tr> -->
+	
 	<tr>
-	<th>Stocks List:</th>
+	<th>Stocks List:</th> 
 	<td>
-<!-- 	<input type="checkbox" name="stock" value="GOOG"> GOOG<br>
-  	<input type="checkbox" name="stock" value="YHOO"> YHOO<br> -->
 	<select name="stocklist" multiple>
 	  <option value="GOOG">GOOG</option>
 	  <option value="YHOO">YHOO </option>
@@ -34,14 +34,16 @@ once the user enters info he is taken back or to user_list.html -->
 	  <option value="PEP">PEP</option>
 	  <option value="AAPL">AAPL</option>
 	  <option value="FDX">FDX</option>
-	  
 	</select>
-	<!-- <input type="submit" id="addbutton" value="ADD" /> -->
-	<center><p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p></center>
+	</td>
+	</tr>
+	<tr>
+	<td>
+		<center><p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p></center>
 	</td>
 	</tr>
 	
-	</div>
+	<!-- </div> -->
 
 	<!-- we start with <input> and <datalist> elements. Ensure that you link the two using the id and list attributes. -->
     <!--div id="page-wrapper">
@@ -128,10 +130,10 @@ request.send();
 
 
 	<tr>
-	<td>
+	<th>
 	<center><p>Kindly help us with some additional information below:
 	</p></center>
-	</td>
+	</th>
 	</tr>
 <tr>
 	<th>Age Group:</th>
@@ -201,7 +203,7 @@ request.send();
 	</td>
 </tr>
 
-
+<!-- </div> -->
 <!-- Use a input range slider instead but in sprint 2 -->
 <!-- <tr>
 	
@@ -224,12 +226,12 @@ request.send();
 
 
 </tr>
-<center>
+
   <tr>
   	<td><center><input type="submit" value="SUBMIT"></center>
   	</td>
   	 </tr>
-  	 </center>
+  
 
 <!-- 
 

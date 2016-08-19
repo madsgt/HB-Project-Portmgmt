@@ -1,43 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
  
 
     <title><center>StockPie: The Stock Portfolio Allocation Site</center></title>
 
     <!-- Bootstrap -->
-    <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cyborg/bootstrap.min.css"
-          rel="stylesheet">
+   <!--  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cyborg/bootstrap.min.css"
+          rel="stylesheet"> -->
           
-    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>  
     <link rel="stylesheet" href="/static/css/site.css"/>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     
 </head>
 <body>
-<div class="container">
+<!-- <div class="container"> -->
 
 
   <h1>
     <center>Your Stock Allocation Pie!</center>
-  </h1>
+    <h3><p><center> A site to guide you to allocate your money to the stocks of your choice! </center></p></h3>
+    </h1>
   {% for msg in get_flashed_messages() %}
     <div class="alert alert-info">{{ msg }}</div>
   {% endfor %}
 
-  {% block content %}CONTENT HERE{% endblock %} 
+  
 
-  <!-- what is this doing not sure -->
-</div>
+<!-- </div> -->
 
 <br/>
 
-<div id="footer">
-  <font face="arial" size="-2">
-    <p><center>Data and information is provided for informational purposes only, and is not intended for trading purposes. Neither the site or the site owner shall be liable for any errors or delays in the content, or for any actions taken in reliance thereof</center></p>
-  </font>
-</div>
+<style>
 
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background-color: lightblue;
+    }
+
+</style>
+
+
+
+
+{% block content %} CONTENT HERE {% endblock %} 
+
+
+<footer>
+<!-- <div id="footer"> -->
+  <font face="arial" size="-2">
+    <p><center>Data and information is provided for informational purposes only, and is not intended for trading purposes. Neither the site or the site owner shall be liable for any errors or delays in the content, or for any actions taken in reliance thereof</center></p><br>
+   
+  </font>
+<!-- </div> -->
+</footer>
 </body>
 </html>
 

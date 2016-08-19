@@ -1,4 +1,4 @@
-h1,
+/*h1,
 h2,
 h3,
 h4,
@@ -15,7 +15,7 @@ body {
 
     color: white;
     text-align: center;
-}
+}*/
 
 h1 {
     height: 150px;
@@ -31,20 +31,18 @@ h1 {
     font-size: 1em;
 }
 
-p {
+/*p {
     color: black;
     border: 1px solid powderblue;
     margin: 100px;
-}
+}*/
 
 p.error {
     color: red;
 }
 
-#footer {
+/*#footer {
     position: fixed;
     bottom: 0;
-    width: 100%;  /* required because fixed position */
-}
-
-
+    width: 100%;  /* required because fixed position 
+} */
