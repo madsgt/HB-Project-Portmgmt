@@ -3,7 +3,7 @@
 <head>
  
 
-    <title><center>StockPie: The Stock Portfolio Allocation Site</center></title>
+    <title>StockPie: The Stock Portfolio Allocation Site</title>
 
     <!-- Bootstrap -->
    <!--  <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/cyborg/bootstrap.min.css"
@@ -22,9 +22,9 @@
     <center>Your Stock Allocation Pie!</center>
     <h3><p><center> A site to guide you to allocate your money to the stocks of your choice! </center></p></h3>
     </h1>
-  {% for msg in get_flashed_messages() %}
+    {% for msg in get_flashed_messages() %}
     <div class="alert alert-info">{{ msg }}</div>
-  {% endfor %}
+    {% endfor %}
 
   
 
@@ -50,12 +50,12 @@
 
 
 <footer>
-<!-- <div id="footer"> -->
+<div id="footer">
   <font face="arial" size="-2">
     <p><center>Data and information is provided for informational purposes only, and is not intended for trading purposes. Neither the site or the site owner shall be liable for any errors or delays in the content, or for any actions taken in reliance thereof</center></p><br>
    
   </font>
-<!-- </div> -->
+</div>
 </footer>
 </body>
 </html>

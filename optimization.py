@@ -36,9 +36,9 @@ def get_allstocks_info(symbol):
 
 #-------------------------------------------------------------
 def historical_returns(yahooapidata):
-    """this function will calculate daily returns for the 3 yrs for a stock symbol"""
+    """this function will calculate daily returns for the 3 yrs for a stock symbol """
     """the data input here are list of dictionaries that looks like below and for each symbol we 
-    need to loop  
+    need to loop ,Calc-((adj close (t)/adj close(t-1)-1)/ for 3 years data  
     input data looks as below
     [{'GOOG': ['777.140015', '782.440002', '783.219971', '784.849976', '784.679993']},
     {'YHOO': ['42.490002', '42.669998', '42.939999', '41.27', '39.93', '39.240002']}] 
@@ -51,10 +51,10 @@ def historical_returns(yahooapidata):
     """
 
     new_dict = {}
-    for my_dict in test:
+    for my_dict in yahooapidata:
         # print my_dict.keys()
         return_values= []
-        for key in my_dict.keys():
+        for key in my_dict:
             
             value = my_dict[key]
             
@@ -65,12 +65,11 @@ def historical_returns(yahooapidata):
            
     return_vec_array = numpy.array([new_dict.values()])
     return_vec = return_vec_array.T # I need matrix for all dictionaries together
-    return [returns, return_vec]
+    return [return_values, return_vec]
 
 # I expect returns to be multiple dictionaries here with key as symbol and values are the returns
+# work on getting return_vec to sow in the right form of array and get it to the next function
 
-
-# function to calculate daily returns , ((adj close (t)/adj close(t-1)-1)/ for 3 years data
 #-------------------------------------------------------------
 
 
@@ -78,39 +77,40 @@ def historical_returns(yahooapidata):
 
 def optimal_portfolio(returns):
 
-    returns, return_vec = historical_returns(returns)
+    # return_values, return_vec = historical_returns()
 
     n = len(returns)
-    returns = np.asmatrix(returns)
+    returns = numpy.asmatrix(returns)
     
     N = 100
     mus = [10**(5.0 * t/N - 1.0) for t in range(N)]
-    
     # Convert to cvxopt matrices
-    S = opt.matrix(np.cov(returns))
-    pbar = opt.matrix(np.mean(returns, axis=1))
+    S = matrix(numpy.cov(returns))
+    pbar = matrix(numpy.mean(returns, axis=1))
     
     # Create constraint matrices
-    G = -opt.matrix(np.eye(n))   # negative n x n identity matrix
-    h = opt.matrix(0.0, (n ,1))
-    A = opt.matrix(1.0, (1, n))
-    b = opt.matrix(1.0)
+    G = -matrix(numpy.eye(n))   # negative n x n identity matrix
+    h = matrix(0.0, (n ,1))
+    A = matrix(1.0, (1, n))
+    b = matrix(1.0)
     
     # Calculate efficient frontier weights using quadratic programming
     portfolios = [solvers.qp(mu*S, -pbar, G, h, A, b)['x'] 
                   for mu in mus]
     ## CALCULATE RISKS AND RETURNS FOR FRONTIER
     returns = [blas.dot(pbar, x) for x in portfolios]
-    risks = [np.sqrt(blas.dot(x, S*x)) for x in portfolios]
+    risks = [numpy.sqrt(blas.dot(x, S*x)) for x in portfolios]
     ## CALCULATE THE 2ND DEGREE POLYNOMIAL OF THE FRONTIER CURVE
-    m1 = np.polyfit(returns, risks, 2)
-    x1 = np.sqrt(m1[2] / m1[0])
+    m1 = numpy.polyfit(returns, risks, 2)
+    x1 = numpy.sqrt(m1[2] / m1[0])
     # CALCULATE THE OPTIMAL PORTFOLIO
-    wt = solvers.qp(opt.matrix(x1 * S), -pbar, G, h, A, b)['x']
+    wt = solvers.qp(matrix(x1 * S), -pbar, G, h, A, b)['x']
 
-    return np.asarray(wt), returns, risks
+    return numpy.asarray(wt), returns, risks
 
 
 
-weights, returns, risks = optimal_portfolio(return_vec)
-    
+    # weights, returns, risks = optimal_portfolio(return_vec)
+
+
+# optimal_portfolio([[-0.00355164, -0.00491801],[ 0.00681986,  0.0042362 ]])
