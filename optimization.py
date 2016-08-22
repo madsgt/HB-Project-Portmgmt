@@ -34,7 +34,7 @@ def historical_returns(yahooapidata):
 
     new_dict = {}
     for my_dict in yahooapidata:
-        # print my_dict.keys()
+        # print my_d+ct.keys()
         return_values= []
         for key in my_dict:
             
@@ -44,13 +44,13 @@ def historical_returns(yahooapidata):
                 returns = float(value[i+1])/float(value[i])-1
                 return_values.append(returns)
             new_dict[key] = return_values
-           
-    return_vec_array = numpy.array([new_dict.values()]) # creates an array of symbol returns, with symbols as rows and the returns as columns
-    return_vec = return_vec_array.T # I need matrix for all dictionaries together
-    return return_vec
 
-# I expect returns to be multiple dictionaries here with key as symbol and values are the returns
-# work on getting return_vec to sow in the right form of array and get it to the next function
+    return new_dict.values(), new_dict.keys()
+
+    # need to store the keys to match final weights with d keys
+           
+
+
 
 #-------------------------------------------------------------
 
@@ -59,7 +59,7 @@ def historical_returns(yahooapidata):
 
 def optimal_portfolio(returns):
 
-    # return_vec = historical_returns()
+    # new_dict.values() = historical_returns(returns)
 
     n = len(returns)
     returns = numpy.asmatrix(returns)
@@ -71,8 +71,14 @@ def optimal_portfolio(returns):
     pbar = matrix(numpy.mean(returns, axis=1))
     
     # Create constraint matrices
-    G = -matrix(numpy.eye(n))   # negative n x n identity matrix
-    h = matrix(0.0, (n ,1))
+    m=[[-1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0],[0.0,-1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0],[0.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0],[0.0,0.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0,0.0],[0.0,0.0,0.0,0.0,-1.0,0.0,0.0,0.0,0.0,1.0]]
+    G = matrix(m)
+  
+    ab=[0,0,0,0,0,0.3,0.3,0.3,0.3,0.3]
+    h=matrix(ab)
+
+    # G = -matrix(numpy.eye(n))   # negative n x n identity matrix
+    # h = matrix(0.0, (n ,1))
     A = matrix(1.0, (1, n))
     b = matrix(1.0)
     
@@ -88,9 +94,11 @@ def optimal_portfolio(returns):
     # CALCULATE THE OPTIMAL PORTFOLIO
     wt = solvers.qp(matrix(x1 * S), -pbar, G, h, A, b)['x']
 
-    return numpy.asarray(wt), returns, risks
+    return numpy.asarray(wt) # changed this to get only weights
 
+    # return numpy.asarray(wt), returns, risks 
 
+    # we have changed the matric constraints for G and h to ensure no portfolio takes more than 30% of the allocation
 
     # weights, returns, risks = optimal_portfolio(return_vec)
 

@@ -67,6 +67,6 @@ def get_all_stock_data(tickers):
 
 if __name__=="__main__":
 
-    test = get_all_stock_data(["GOOG","YHOO"]) 
+    test = get_all_stock_data(["GOOG","YHOO","AAPL","MSFT","AA"]) 
     # need to pull data for 2 to 5 stocks and store this ,make this dynamic
     printer.pprint(test)
