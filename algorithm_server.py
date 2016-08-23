@@ -141,15 +141,13 @@ def stock_pie_data():
 
    
       
-    return portfolio
+    
 
     
     # the weights will be a list and make it a dictionary and pass it below
 
     data_list_of_dicts = {
-    # use for loop later to pick up 2 upto 5 symbols
-    # 
-    # Need to add infor from calculations of weights from Optimization.py file
+  
         # 'stocks': [
         #     {
         #         "value": 15,

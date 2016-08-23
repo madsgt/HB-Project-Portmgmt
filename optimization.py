@@ -2,7 +2,7 @@
 import scipy
 import cvxopt
 import numpy
-from cvxopt import matrix, solvers, blas
+from cvxopt import matrix, solvers, blas, printing
 import pandas as pd 
 from math import sqrt
 import yahoo_api
@@ -46,11 +46,8 @@ def historical_returns(yahooapidata):
             new_dict[key] = return_values
 
     return new_dict.values(), new_dict.keys()
-
-    # need to store the keys to match final weights with d keys
-           
-
-
+    """ The result is like ([[0.006819861154621076, 0.0009968419278234553, 0.0020811586276570093, -0.0002165802448849119], [-1.96, -1.7833333333333332, 0.8676063829787235, -2.1107630087436986]], ['GOOG', 'YHOO'])
+    """
 
 #-------------------------------------------------------------
 
@@ -58,19 +55,8 @@ def historical_returns(yahooapidata):
 
 
 def optimal_portfolio(returns):
-    """Expected results is 
-    array([[  2.99999928e-01],
-       [  5.44255695e-08],
-       [  1.00000121e-01],
-       [  2.99999928e-01],
-       [  2.99999968e-01]])
-
-   ['GOOG', 'YHOO', 'AAPL', 'AA', 'MSFT']"""
-
-
-
-
-    # new_dict.values() = historical_returns(returns)
+   
+   
 
     n = len(returns)
     returns = numpy.asmatrix(returns)
@@ -105,34 +91,56 @@ def optimal_portfolio(returns):
     # CALCULATE THE OPTIMAL PORTFOLIO
     wt = solvers.qp(matrix(x1 * S), -pbar, G, h, A, b)['x']
 
-    return numpy.asarray(wt)
+    weights = matrix(wt)
+    printing.options['dformat'] = '%.1f' #rounding up weights to 1 decimal
 
-    # Need help with calling a function within another function and rebind the keys with the result
+    # return numpy.asarray(wt)
+    return weights #changed in matrix
+    """result looks like the follwg- 
+    [0.1]
+    [0.3]
+    [0.3]
+    [0.3]
+    [0.0]"""
 
 
-     # changed this to get only weights
+  
 
     # return numpy.asarray(wt), returns, risks 
 
-    # we have changed the matric constraints for G and h to ensure no portfolio takes more than 30% of the allocation
+    # we have changed the matrix constraints for G and h to ensure no portfolio takes more than 30% of the allocation,currently works for 5 stovks
 
     # weights, returns, risks = optimal_portfolio(return_vec)
 
 
-# optimal_portfolio([[-0.00355164, -0.00491801],[ 0.00681986,  0.0042362 ]])
 
 def final_portfolio(symbol_list):
-    yahooapidata = yahoo_api.get_all_stock_data(symbol_list)
-    historicalreturns = historical_returns(yahooapidata)
+    yahooapidata = yahoo_api.get_all_stock_data(symbol_list) # this gets api data for all the symbols
+    historicalreturns = historical_returns(yahooapidata) # calcultes the returns for the symbols, output is a dictionary
 
-    # portfolio = optimal_portfolio([[-0.00355164, -0.00491801],[ 0.00681986,  0.0042362 ]])    
-    my_portfolio_values = optimal_portfolio(historicalreturns[0])
-    my_tickers = historicalreturns[1]
-    rounding_portfolio_values = numpy.around(my_portfolio_values, decimals=1)
+   
+    my_portfolio_values = optimal_portfolio(historicalreturns[0]) # take the returns as values and pass into the function
+    my_tickers = historicalreturns[1] # the key is stored separately
+    
+    # new_valuelist = []
+    # for value in my_portfolio_values:
+    #     print value
+    #     for i in value:
+    #         print i
+    #         new_value += value[i] 
+    #     new_valuelist.append(new_value)
+    #     print new_valuelist
+
+    # return dict(zip(my_tickers, new_valuelist))
+        
+
+   
  
-    # return  dict(zip(my_tickers, zip(rounding_portfolio_values))
-    return dict(zip(my_tickers, rounding_portfolio_values)) 
-    """ The results are {'GOOG': array([ 0.1]), 'YHOO': array([ 0.3]), 'AAPL': array([ 0.3]), 'AA': array([ 0.3]), 'MSFT': array([ 0.])}"""
+    return dict(zip(my_tickers, my_portfolio_values)) 
+    """ the results are {'GOOG': 0.09984881968219586, 'YHOO': 0.29996987179127077, 'AAPL': 0.2999752441661823, 'AA': 0.2999938062886864, 
+    'MSFT': 0.00021225807166471572} """
+  
+  
 
 
 
