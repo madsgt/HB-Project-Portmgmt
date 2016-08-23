@@ -58,6 +58,17 @@ def historical_returns(yahooapidata):
 
 
 def optimal_portfolio(returns):
+    """Expected results is 
+    array([[  2.99999928e-01],
+       [  5.44255695e-08],
+       [  1.00000121e-01],
+       [  2.99999928e-01],
+       [  2.99999968e-01]])
+
+   ['GOOG', 'YHOO', 'AAPL', 'AA', 'MSFT']"""
+
+
+
 
     # new_dict.values() = historical_returns(returns)
 
@@ -94,7 +105,12 @@ def optimal_portfolio(returns):
     # CALCULATE THE OPTIMAL PORTFOLIO
     wt = solvers.qp(matrix(x1 * S), -pbar, G, h, A, b)['x']
 
-    return numpy.asarray(wt) # changed this to get only weights
+    return numpy.asarray(wt)
+
+    # Need help with calling a function within another function and rebind the keys with the result
+
+
+     # changed this to get only weights
 
     # return numpy.asarray(wt), returns, risks 
 
@@ -105,6 +121,25 @@ def optimal_portfolio(returns):
 
 # optimal_portfolio([[-0.00355164, -0.00491801],[ 0.00681986,  0.0042362 ]])
 
+def final_portfolio(symbol_list):
+    yahooapidata = yahoo_api.get_all_stock_data(symbol_list)
+    historicalreturns = historical_returns(yahooapidata)
+
+    # portfolio = optimal_portfolio([[-0.00355164, -0.00491801],[ 0.00681986,  0.0042362 ]])    
+    my_portfolio_values = optimal_portfolio(historicalreturns[0])
+    my_tickers = historicalreturns[1]
+    rounding_portfolio_values = numpy.around(my_portfolio_values, decimals=1)
+ 
+    # return  dict(zip(my_tickers, zip(rounding_portfolio_values))
+    return dict(zip(my_tickers, rounding_portfolio_values)) 
+    """ The results are {'GOOG': array([ 0.1]), 'YHOO': array([ 0.3]), 'AAPL': array([ 0.3]), 'AA': array([ 0.3]), 'MSFT': array([ 0.])}"""
+
+
+
+ 
+
+
 if __name__ == "__main__":
     import algorithm_server
+    print final_portfolio(["GOOG","YHOO","MSFT","AA","AAPL"])
     

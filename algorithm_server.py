@@ -124,11 +124,9 @@ def results():
 
     db.session.commit()
 
-    yahooapidata = yahoo_api.get_all_stock_data(symbol_list)
-    historicalreturns = optimization.historical_returns(yahooapidata)
-    portfolio = optimal_portfolio([[-0.00355164, -0.00491801],[ 0.00681986,  0.0042362 ]])    
-    # portfolio = optimization.optimal_portfolio(historicalreturns) 
-    
+    final = optimization.final_portfolio(symbol_list)
+
+
     return render_template("results.html", symbol_list=symbol_list)
     # not sure of passing yahooapidata in render template
    
