@@ -69,8 +69,7 @@ def user_data():
     g.returnexpectation = returnexpectation
 
     stockstring = stocklist[0]
-    for stock in stocklist:
-        #FIXME 
+    for stock in stocklist[1:]:
         stockstring =  stockstring + "&" + stock
     g_values = {"gender":gender, "agegroup":agegroup, "income": income, "amounttoinvest": amounttoinvest, "riskexpectation":riskexpectation,"returnexpectation":returnexpectation}
     
@@ -165,6 +164,7 @@ def stock_pie_data():
    
       
     data = [label for label in labels]
+    print data 
     backgroundColors = CHARTJS_COLORS[:len(labels)]
     
  
