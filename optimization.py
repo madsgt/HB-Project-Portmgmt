@@ -131,7 +131,7 @@ def final_portfolio(symbol_list):
     #     new_valuelist.append(new_value)
     #     print new_valuelist
 
-    # return dict(zip(my_tickers, new_valuelist))
+    # return dict(zip(my_tickers, new_valuelist)) was trying to round 
         
 
    

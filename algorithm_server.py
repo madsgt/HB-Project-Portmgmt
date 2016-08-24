@@ -29,6 +29,9 @@ app.jinja_env.undefined = jinja2.StrictUndefined
 app.jinja_env.auto_reload = True
 
 
+CHARTJS_COLORS = ["#b366ff", "#0059b3", "#00cc99", "#ffd480",
+               "#ff99cc", "#b3e6ff", "#bfff80", "#ffccb3"]
+
 @app.route("/")
 def index():
     """Return homepage."""
@@ -67,17 +70,27 @@ def user_data():
 
     stockstring = stocklist[0]
     for stock in stocklist:
-        stockstring = stockstring + "&" + stock
+        #FIXME 
+        stockstring =  stockstring + "&" + stock
+    g_values = {"gender":gender, "agegroup":agegroup, "income": income, "amounttoinvest": amounttoinvest, "riskexpectation":riskexpectation,"returnexpectation":returnexpectation}
+    
+    session["g_values"] = g_values
 
 
-    if len(stocklist)<2 or len(stocklist)>5:
-        flash("Please choose min 2 or max 5 symbols")
+     # if len(stocklist)<2 or len(stocklist)>5:
+        # flash("Please choose min 2 or max 5 symbols")
+    if len(stocklist)>5:
+        flash("Please choose 5 symbols")
+        return redirect("/start")
+    elif gender == "" or agegroup == "" or income == "" or amounttoinvest == "" or riskexpectation == "" or returnexpectation == "":
+        flash("Kindly do not leave the choice blank!")
         return redirect("/start")
     else:
         flash("Successfully added the information.")
 
         return redirect("/list/%s" % stockstring)
 
+    # we can use jquery ajax to highlight a field in red in case no input
 
 
 
@@ -89,15 +102,16 @@ def user_data():
 def show_list(stockstring):
     """Show info of list of symbols selected"""
 
-    
+   
     stocklist = stockstring.split("&")
     symbol_info_list = []
     for symbol in stocklist:
         symbol_info = Stock.query.get(symbol)
         symbol_info_list.append(symbol_info)
-        print symbol_info_list
+        # print symbol_info_list
+    g_values = session["g_values"]
 
-    return render_template("user_list.html", symbol_info_list=symbol_info_list)
+    return render_template("user_list.html", symbol_info_list=symbol_info_list, g_values=g_values)
 
 
 
@@ -123,11 +137,11 @@ def results():
     db.session.add(userdata) # add to the session for storing
 
     db.session.commit()
-
+    
     final = optimization.final_portfolio(symbol_list)
 
 
-    return render_template("results.html", symbol_list=symbol_list)
+    return render_template("results.html", symbol_list=symbol_list, final=final)
     # not sure of passing yahooapidata in render template
    
     # need to send the stocklist to yahoo_api.py and that data to optimization
@@ -139,39 +153,43 @@ def stock_pie_data():
     pie chart."""
  #ajax request , REQUEST.ARGS.GET (GET THE STOCKLIST OUT)
 
+    # weights = results(final)
+    weights = {'GOOG': 0.09984881968219586, 'YHOO': 0.29996987179127077, 'AAPL': 0.2999752441661823, 'AA': 0.2999938062886864, 
+    'MSFT': 0.00021225807166471572}
+
+    labels = set([]) # store the keys in the label set
+
+    for key in weights:
+        chart_key = weights[key]
+        labels.add(chart_key)
    
       
+    data = [label for label in labels]
+    backgroundColors = CHARTJS_COLORS[:len(labels)]
     
-
-    
-    # the weights will be a list and make it a dictionary and pass it below
-
+ 
     data_list_of_dicts = {
-  
-        # 'stocks': [
-        #     {
-        #         "value": 15,
-        #         "color": "#F7464A",
-        #         "highlight": "#FF5A5E",
-        #         "label": symbol1
-        #     },
-        #     {
-        #         "value": 50,
-        #         "color": "#46BFBD",
-        #         "highlight": "#5AD3D1",
-        #         "label": symbol2
-        #     },
-        #     {
-        #         "value": 100,
-        #         "color": "#FDB45C",
-        #         "highlight": "#FFC870",
-        #         "label": "Yellow Watermelon"
-            }
 
-    pass
-# return jsonify(data_list_of_dicts)
+        'stocks': [{
 
-# DATA_LIST_OF_DICTS GETS PASSED IN DATA IN js
+                    "labels": list(labels),
+                    "datasets":[{"data": data,
+                    "backgroundColor": backgroundColors}]
+                    }]
+
+                    }
+        
+
+    
+    return jsonify(data_list_of_dicts)
+
+    #----------------------------------------------------------------------------------------------
+
+@app.route("/test")
+def test_results():
+
+
+    return render_template("results.html")
 
 
 

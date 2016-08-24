@@ -9,12 +9,13 @@
 
 {% block title %}Your Stock Portfolio Allocation Pie!{% endblock %}
 
+{% block content %}
   	
- <!--  <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js">-->
+     <script src=
+  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js">
 </script>
-<script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
-<script src="node_modules/chart.js/Chart.min.js"></script>
+<!-- <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+<script src="node_modules/chart.js/Chart.min.js"></script> -->
 
   
 
@@ -59,8 +60,8 @@
     var ctx_donut = $("#donutChart").get(0).getContext("2d");
     /*USE JQUERY TO GET THE STOCKLIST OUT OF THE HTML (SELECT ELEMENTS)
     PASS THE STOCK LIST IN .GET KEY IS STOCKLIST AND VALUE STOCKLIST (AJAX LECTURE)*/
-    $.get("/final.json", function (data) {
-      var myDonutChart = new Chart(ctx_donut).Doughnut(data.xxxxx, options);
+    $.get("/final.json", function (data) { console.log(data);
+      var myDonutChart = new Chart(ctx_donut).Doughnut(data.stocks, options);
       $('#donutLegend').html(myDonutChart.generateLegend());
     });
 

@@ -24,14 +24,17 @@ we go to results.html page -->
         </tr>
 
            {% endfor %}
+           <br>
+        <ul> 
         <tr>
-            <td>Gender: {{ g.gender }} </td>
-            <td>Age Group: {{ g.agegroup }} </td>
-            <td>Income: {{ g.income }} </td>
-            <td>Amount to Invest: {{ g.amounttoinvest }} </td>
-            <td>Risk Expectation: {{ g.riskexpectation }} </td>
-            <td>Return Expectation: {{ g.returnexpectation }} </td>
-        </tr>            
+            <li><td>Gender: {{ g_values["gender"] }} </td></li>
+            <li><td>Age Group: {{ g_values["agegroup"] }} </td></li>
+            <li><td>Income: {{ g_values["income"] }} </td></li>
+            <li><td>Amount to Invest: {{ g_values["amounttoinvest"] }} </td></li>
+            <li><td>Risk Expectation: {{ g_values["riskexpectation"] }} </td></li>
+            <li><td>Return Expectation: {{ g_values["returnexpectation"] }} </td></li>
+        </tr>  
+          </ul>       
 
       
             <div id="frm">

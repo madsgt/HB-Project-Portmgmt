@@ -79,6 +79,23 @@ class UserData(db.Model):
         return "<user_id=%s gender=%s agegroup=%s income=%s amounttoinvest=%s riskexpectation=%s returnexpectation=%s>" % (self.user_id, self.gender, self.agegroup, self.income, self.amounttoinvest, self.riskexpectation, self.returnexpectation)
 
 
+# def example_data():
+#     """Create some sample data."""
+
+#     # In case this is run more than once, empty out existing data
+#     Stock.query.delete()
+#     UserData.query.delete()
+#     YahooData.query.delete()      
+
+#     # Add sample stocks and yahoodata and userdata
+#     stock1 = Stock(symbol='ACZ', name='ACUTEIZ', sector='Utilities')
+#   
+#     ezra = UserData(name='Leonard', dept=dl)
+#     
+#     nadine = Employee(name='Nadine')
+
+#     db.session.add_all([df, dl, dm, leonard, liz, maggie, nadine])
+#     db.session.commit()
 
 
 
