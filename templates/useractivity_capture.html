@@ -5,7 +5,7 @@
 <!-- Not sure if I need a form action or a form class, this will capture all the info user enters in the form
 once the user enters info he is taken back or to user_list.html -->
 <form action="/start" method="POST">
-<!-- <div class="row"> -->
+<div class="row">
 <table border="0" cellspacing="4" cellpadding="0">
 	<table style="width:100%">
 	<tbody>
@@ -43,16 +43,16 @@ once the user enters info he is taken back or to user_list.html -->
 	</td>
 	</tr>
 	
-	<!-- </div> -->
+	</div>
 
 	<!-- we start with <input> and <datalist> elements. Ensure that you link the two using the id and list attributes. -->
-    <!--div id="page-wrapper">
-  <h1>Stock list Autocomplete Demo</h1>
+    <!-- <div id="page-wrapper"> -->
+  <!-- <h1>Stock list Autocomplete Demo</h1> -->
   
-  <label for="default">Pick a stock</label>
-  <input type="text" id="default" list="languages" placeholder="e.g. GOOG">
+<!--   <label for="default">Pick a stock</label>
+  <input type="text" id="default" list="languages" placeholder="e.g. GOOG"> -->
   
-  <datalist id="stocks">
+<!--   <datalist id="stocks">
     <option value="GOOG">
     <option value="AA">
     <option value="PEP">
@@ -65,25 +65,27 @@ once the user enters info he is taken back or to user_list.html -->
     <option value="ABT">
     <option value="ABBV">
     <option value="AAPL">
-  </datalist>
+  </datalist> -->
   
-  
+<!--   
   <label for="ajax">Pick a Stock Symbol </label>
   <input type="text" id="ajax" list="json-datalist" placeholder="e.g. datalist">
   <datalist id="json-datalist"></datalist>
 
   
-</div>
-
+</div> -->
+	
 	<div class="fieldwrapper">
+		<!-- <div id="page-wrapper"> -->
     <tr><center><input type="text" id="ajax" list="json-datalist" placeholder="e.g. GOOG">
     	<input type="submit" id="addbutton" value="ADD" />
 		<datalist id="json-datalist"></datalist></center> </tr>
+		
 	<script>
 	// Get the <datalist> and <input> elements.
 	var dataList = document.getElementById('json-datalist');
 	var input = document.getElementById('ajax');
-    /*to load the JSON file (S&P500constituents.json) and populate the options for the <datalist> element.*/
+   
     // Create a new XMLHttpRequest.
 	var request = new XMLHttpRequest();
 
@@ -110,18 +112,29 @@ once the user enters info he is taken back or to user_list.html -->
 	      // An error occured :(
 	      input.placeholder = "Couldn't load symbol options :(";
 	    }
+
 	  }
 	};
+	//want to limit users to choosing 5 stocks only
+	 $(".chosen-select").chosen({max_selected_options: 5});
+	 //once he tries to exceed 5 wnat to give him a alert
+	 $(".chosen-select").bind("chosen:maxselected", function () { 
+	 	... }); 
+	 //make the box flexible with the width
+	 $(".chosen-select").chosen({width: "95%"});
+
+
 
 // Update the placeholder text.
 input.placeholder = "Loading symbols...";
 
 // Set up and make the request.
-request.open('GET','S&P500constituents.json', true);
+request.open('GET','/static/symbols.json', true);
 request.send();
 
 </script>
-</div> -->
+</div> 
+<!-- </div> -->
 
 
 

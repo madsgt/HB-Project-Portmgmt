@@ -7,7 +7,6 @@ Authors: Madhuri Ghosh.
 
 from flask import Flask, render_template, redirect, flash, session, request, jsonify, make_response, g
 import jinja2
-
 import optimization
 import yahoo_api
 import json

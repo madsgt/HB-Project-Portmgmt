@@ -26,6 +26,15 @@ h1 {
     background-size: 200px 190px;
 }
 
+/*#page-wrapper {
+  width: 640px;
+  background: #FFFFFF;
+  padding: 1em;
+  margin: 1em auto;
+  border-top: 5px solid #69c773;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+*/
 #homepage-title {
 	height: 30px;
     font-size: 1em;
