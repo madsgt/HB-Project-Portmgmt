@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Stock Pie!{% endblock %}
+
+
+{% block content %}
+
+
+  <h2> Stock Pie Chart</h2>
+
+  <div class="stock-chart">
+    <canvas id="donutChart"></canvas>
+
+    <script>
+    var options = {
+      responsive: true
+    };
+
+    // Make Donut Chart of percent of different types of Melons
+    var ctx_donut = $("#donutChart").get(0).getContext("2d");
+
+    $.get("/final.json", function (data) {
+      var myDonutChart = new Chart(ctx_donut,{
+      type: 'doughnut',
+      data: data,
+      options: options
+      });
+
+      $('#donutLegend').html(myDonutChart.generateLegend());
+    });
+
+ </script>
+
+{% endblock %}

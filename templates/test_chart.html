@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+       <title>The Stock Chart</title>
+       <script src=
+  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js">
+  </script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link href="/static/css/chart.css" rel="stylesheet"></link>
+</head>
+<body>
+    <h2><center> Stock Pie </center> </h2>
+ <!--Div that will hold the pie chart-->
+<div class="stock-chart">
+<canvas id="donutChart"></canvas></div>
+<!-- <div id="donutLegend" class="chart-legend"></div> -->
+
+
+    <script>
+    $("document").ready(function(){var options = {
+      responsive: true  
+        //Boolean - Whether we should show a stroke on each segment
+      /*segmentShowStroke : true,
+      //String - The colour of each segment stroke
+      segmentStrokeColor : "#fff",
+      //Number - The width of each segment stroke
+      segmentStrokeWidth : 2,
+      //The percentage of the chart that we cut out of the middle.
+      percentageInnerCutout : 50,
+      //Boolean - Whether we should animate the chart 
+      animation : true,
+      //Number - Amount of animation steps
+      animationSteps : 100,  
+      //String - Animation easing effect
+      animationEasing : "easeOutBounce",
+      //Boolean - Whether we animate the rotation of the Doughnut
+      animateRotate : true,
+      //Boolean - Whether we animate scaling the Doughnut from the centre
+      animateScale : true    */
+    };
+
+    // Make Donut Chart of percent of different types of Melons
+    var ctx_donut = $("#donutChart").get(0).getContext("2d");
+      $.get("/final.json", function (data) { console.log(data)
+        console.log(ctx_donut)
+          var myDonutChart = new Chart(ctx_donut, {
+      type: 'doughnut',
+      data: data,
+      options: options
+      }); console.log(myDonutChart)
+           });})
+    /*var options = {
+      responsive: true  
+        //Boolean - Whether we should show a stroke on each segment
+      segmentShowStroke : true,
+      //String - The colour of each segment stroke
+      segmentStrokeColor : "#fff",
+      //Number - The width of each segment stroke
+      segmentStrokeWidth : 2,
+      //The percentage of the chart that we cut out of the middle.
+      percentageInnerCutout : 50,
+      //Boolean - Whether we should animate the chart 
+      animation : true,
+      //Number - Amount of animation steps
+      animationSteps : 100,  
+      //String - Animation easing effect
+      animationEasing : "easeOutBounce",
+      //Boolean - Whether we animate the rotation of the Doughnut
+      animateRotate : true,
+      //Boolean - Whether we animate scaling the Doughnut from the centre
+      animateScale : true    
+    };
+
+    // Make Donut Chart of percent of different types of Melons
+    var ctx_donut = $("#donutChart").get(0).getContext("2d");
+      $.get("/final.json", function (data) { console.log(data)
+          var myDonutChart = new Chart(ctx_donut, {
+      type: 'doughnut',
+      data: data,
+      options: options
+      }); console.log(myDonutChart)
+           });
+*/
+    
+    </script>
+
+</body>
+</html>
