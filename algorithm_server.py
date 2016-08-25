@@ -71,7 +71,6 @@ def user_data():
     for stock in stocklist[1:]:
         stockstring =  stockstring + "&" + stock
     g_values = {"gender":gender, "agegroup":agegroup, "income": income, "amounttoinvest": amounttoinvest, "riskexpectation":riskexpectation,"returnexpectation":returnexpectation}
-    
     session["g_values"] = g_values
 
 
@@ -99,7 +98,6 @@ def user_data():
 @app.route("/list/<stockstring>")
 def show_list(stockstring):
     """Show info of list of symbols selected"""
-
    
     stocklist = stockstring.split("&")
     symbol_info_list = []
