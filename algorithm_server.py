@@ -159,28 +159,31 @@ def stock_pie_data():
     labels = set([]) # store the keys in the label set
 
     for key in weights:
-        chart_key = weights[key]
-        labels.add(chart_key)
+        labels.add(key)
+
+    data = []
+    for value in weights:
+        # print "value", value
+        rounded_value = int(weights[value]*100)
+        data.append(rounded_value)
+        print data
+ 
    
-      
-    data = [label for label in labels]
-    print data 
     backgroundColors = CHARTJS_COLORS[:len(labels)]
-    
+    hoverBackgroundColors = CHARTJS_COLORS[:len(labels)]
+ 
+    #  [0.0998488196821958, 0.29996987179127077, 0.2999752441661823, 0.2999938062886864, 0.00021225807166471572]   
  
     data_list_of_dicts = {
 
-        'stocks': [{
-
                     "labels": list(labels),
                     "datasets":[{"data": data,
-                    "backgroundColor": backgroundColors}]
-                    }]
-
+                    "backgroundColor": backgroundColors,
+                    "hoverBackgroundColor": hoverBackgroundColors}]
                     }
-        
 
-    
+                    
+    print data_list_of_dicts 
     return jsonify(data_list_of_dicts)
 
     #----------------------------------------------------------------------------------------------
@@ -189,7 +192,7 @@ def stock_pie_data():
 def test_results():
 
 
-    return render_template("results.html")
+    return render_template("test_chart.html")
 
 
 

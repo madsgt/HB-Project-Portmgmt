@@ -9,28 +9,25 @@
 
 {% block title %}Your Stock Portfolio Allocation Pie!{% endblock %}
 
+
+
 {% block content %}
   	
-     <script src=
-  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js">
-</script>
+ 
 <!-- <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
 <script src="node_modules/chart.js/Chart.min.js"></script> -->
-
-  
-
 <!-- ADD A HIDDEN HTML ELEMENT THAT CONTAINS THE STOCKLIST AND USE JINJA TO PUT IT IN -->
 
-<h2> Stock Pie </h2>
+<h2><center> Stock Pie </center> </h2>
  <!--Div that will hold the pie chart-->
 <div class="stock-chart">
-<canvas id="donutChart"></canvas>
-<div id="donutLegend" class="chart-legend"></div>
-<div>
+<canvas id="donutChart" height="600" width="600"></canvas></div>
+<!-- <div id="donutLegend" class="chart-legend"></div> -->
+
 
 	<script>
 	var options = {
-      responsive: true,
+      responsive: true,    
         //Boolean - Whether we should show a stroke on each segment
       segmentShowStroke : true,
       //String - The colour of each segment stroke
@@ -45,27 +42,24 @@
       animationSteps : 100,  
       //String - Animation easing effect
       animationEasing : "easeOutBounce",
-      
       //Boolean - Whether we animate the rotation of the Doughnut
       animateRotate : true,
-
       //Boolean - Whether we animate scaling the Doughnut from the centre
-      animateScale : true,
-      
-      //Function - Will fire on animation completion.
-      onAnimationComplete : null
+      animateScale : true    
     };
 
     // Make Donut Chart of percent of different types of Melons
     var ctx_donut = $("#donutChart").get(0).getContext("2d");
-    /*USE JQUERY TO GET THE STOCKLIST OUT OF THE HTML (SELECT ELEMENTS)
-    PASS THE STOCK LIST IN .GET KEY IS STOCKLIST AND VALUE STOCKLIST (AJAX LECTURE)*/
-    $.get("/final.json", function (data) { console.log(data);
-      var myDonutChart = new Chart(ctx_donut).Doughnut(data.stocks, options);
-      $('#donutLegend').html(myDonutChart.generateLegend());
-    });
+      $.get("/final.json", function (data) { console.log(data)
+          var myDonutChart = new Chart(ctx_donut, {
+      type: 'doughnut',
+      data: data,
+      options: options
+      }); console.log(myDonutChart)
+           });
 
   	
     </script>
   
+    
 {% endblock %}
