@@ -78,6 +78,20 @@ class UserData(db.Model):
         """Provide helpful representation when printed.""" 
         return "<user_id=%s gender=%s agegroup=%s income=%s amounttoinvest=%s riskexpectation=%s returnexpectation=%s>" % (self.user_id, self.gender, self.agegroup, self.income, self.amounttoinvest, self.riskexpectation, self.returnexpectation)
 
+#--------------------------------------------------------------------------------------------
+class Favorite(db.Model):
+    """User inputs for favorite symbols from the form inputs stored here and counter created"""
+
+    __tablename__ = "favorites"
+
+    favorites_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    symbol = db.Column(db.String(6), db.ForeignKey('stocks.symbol'))
+    counter = #fixme need to calculate if symbol already in db increment by one the same row
+
+    stock = db.relationship('Stock', backref='favorites')
+
+    def __repr__(self): 
+        return "<favorites_id=%s symbol=%s name=%s sector=%s counter=%s>" % (self.favorites_id, self.symbol, self.name, self.sector, self.counter)         
 
 # def example_data():
 #     """Create some sample data."""

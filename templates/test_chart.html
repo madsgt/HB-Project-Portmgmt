@@ -4,7 +4,7 @@
 
        <title>The Stock Chart</title>
        <script src=
-  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js">
+  "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js">
   </script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link href="/static/css/chart.css" rel="stylesheet"></link>
@@ -19,25 +19,24 @@
 
     <script>
     $("document").ready(function(){var options = {
-      responsive: true  
-        //Boolean - Whether we should show a stroke on each segment
-      /*segmentShowStroke : true,
-      //String - The colour of each segment stroke
-      segmentStrokeColor : "#fff",
-      //Number - The width of each segment stroke
-      segmentStrokeWidth : 2,
-      //The percentage of the chart that we cut out of the middle.
-      percentageInnerCutout : 50,
-      //Boolean - Whether we should animate the chart 
-      animation : true,
-      //Number - Amount of animation steps
-      animationSteps : 100,  
-      //String - Animation easing effect
-      animationEasing : "easeOutBounce",
-      //Boolean - Whether we animate the rotation of the Doughnut
-      animateRotate : true,
-      //Boolean - Whether we animate scaling the Doughnut from the centre
-      animateScale : true    */
+      responsive: true,
+
+      /*Solution below was received from github issues- https://github.com/chartjs/Chart.js/issues/777
+      http://blog.cryst.co.uk/2016/06/03/adding-percentages-chart-js-pie-chart-tooltips/*/
+       tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var allData = data.datasets[tooltipItem.datasetIndex].data;
+                    var tooltipLabel = data.labels[tooltipItem.index];
+                    var tooltipData = allData[tooltipItem.index];
+                    var total = 0;
+                    for (var i in allData) {
+                        total += allData[i];
+                    }
+                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                }}} 
+     
     };
 
     // Make Donut Chart of percent of different types of Melons
@@ -49,39 +48,10 @@
       data: data,
       options: options
       }); console.log(myDonutChart)
-           });})
-    /*var options = {
-      responsive: true  
-        //Boolean - Whether we should show a stroke on each segment
-      segmentShowStroke : true,
-      //String - The colour of each segment stroke
-      segmentStrokeColor : "#fff",
-      //Number - The width of each segment stroke
-      segmentStrokeWidth : 2,
-      //The percentage of the chart that we cut out of the middle.
-      percentageInnerCutout : 50,
-      //Boolean - Whether we should animate the chart 
-      animation : true,
-      //Number - Amount of animation steps
-      animationSteps : 100,  
-      //String - Animation easing effect
-      animationEasing : "easeOutBounce",
-      //Boolean - Whether we animate the rotation of the Doughnut
-      animateRotate : true,
-      //Boolean - Whether we animate scaling the Doughnut from the centre
-      animateScale : true    
-    };
-
-    // Make Donut Chart of percent of different types of Melons
-    var ctx_donut = $("#donutChart").get(0).getContext("2d");
-      $.get("/final.json", function (data) { console.log(data)
-          var myDonutChart = new Chart(ctx_donut, {
-      type: 'doughnut',
-      data: data,
-      options: options
-      }); console.log(myDonutChart)
            });
-*/
+    
+
+
     
     </script>
 

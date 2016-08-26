@@ -51,6 +51,8 @@ def load_all_stock_data():
 
 def load_favorites():
 
+	
+
 	# """Load counter + symbols from user clicks into database, keep the counter ticking"""
 
 	# print "Favorites"

@@ -3,13 +3,12 @@ import scipy
 import cvxopt
 import numpy
 from cvxopt import matrix, solvers, blas, printing
-import pandas as pd 
+import pandas as pd
 from math import sqrt
 import yahoo_api
-
+import matplotlib.pyplot
 import utils
-
-
+import mpld3
 
 
 
@@ -95,7 +94,7 @@ def optimal_portfolio(returns):
     printing.options['dformat'] = '%.1f' #rounding up weights to 1 decimal
 
     # return numpy.asarray(wt)
-    return weights #changed in matrix
+    return weights  #changed in matrix
     """result looks like the follwg- 
     [0.1]
     [0.3]
@@ -103,7 +102,11 @@ def optimal_portfolio(returns):
     [0.3]
     [0.0]"""
 
-
+# to plot the efficient frontier in the front page 
+matplotlib.pyplot.plot(stds, means, 'o')
+matplotlib.pyplot.ylabel('mean')
+matplotlib.pyplot.xlabel('std')
+matplotlib.pyplot.plot(risks, returns, 'y-o')
   
 
     # return numpy.asarray(wt), returns, risks 

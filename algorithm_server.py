@@ -130,7 +130,10 @@ def results():
     userdata = UserData(gender=gender, agegroup=agegroup, income=income, 
         amounttoinvest=amounttoinvest, riskexpectation=riskexpectation, 
         returnexpectation=returnexpectation)
-    db.session.add(userdata) # add to the session for storing
+
+    favorite = Favorite(symbol=symbol)
+    db.session.add(userdata)
+    db.session.add(favorite) # add to the session for storing
 
     db.session.commit()
     
