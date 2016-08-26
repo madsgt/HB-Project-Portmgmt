@@ -35,6 +35,8 @@ CHARTJS_COLORS = ["#b366ff", "#0059b3", "#00cc99", "#ffd480",
 def index():
     """Return homepage."""
 
+    # symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()   get data from db based on counter 
+
     return render_template("homepage.html")
 
 #-------------------------------------------------------------------------
@@ -132,6 +134,7 @@ def results():
         returnexpectation=returnexpectation)
 
     favorite = Favorite(symbol=symbol)
+
     db.session.add(userdata)
     db.session.add(favorite) # add to the session for storing
 

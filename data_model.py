@@ -86,12 +86,14 @@ class Favorite(db.Model):
 
     favorites_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     symbol = db.Column(db.String(6), db.ForeignKey('stocks.symbol'))
-    counter = #fixme need to calculate if symbol already in db increment by one the same row
+    counter = db.Column(db.Integer, nullable=True, default=1)#fixme need to calculate if symbol already in db increment by one the same row
 
-    stock = db.relationship('Stock', backref='favorites')
+    stock = db.relationship('Stock', backref='favorites', order_by='desc(Favorite.counter)')
 
+    count = Model.query.first()
+    count.counter = Model.counter + 1
     def __repr__(self): 
-        return "<favorites_id=%s symbol=%s name=%s sector=%s counter=%s>" % (self.favorites_id, self.symbol, self.name, self.sector, self.counter)         
+        return "<favorites_id=%s symbol=%s name=%s sector=%s counter=%s>" % (self.favorites_id, self.symbol, self.name, self.sector, self.count.counter)         
 
 # def example_data():
 #     """Create some sample data."""
