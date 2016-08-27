@@ -10,8 +10,9 @@ import jinja2
 import optimization
 import yahoo_api
 import json
-from data_model import Stock, YahooData, UserData, connect_to_db, db
+from data_model import Stock, YahooData, UserData, connect_to_db, db,Favorite
 from flask_debugtoolbar import DebugToolbarExtension
+from sqlalchemy import desc
 
 app = Flask(__name__)
 
@@ -35,9 +36,16 @@ CHARTJS_COLORS = ["#b366ff", "#0059b3", "#00cc99", "#ffd480",
 def index():
     """Return homepage."""
 
-    # symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()   get data from db based on counter 
+    symbol_first = Favorite.query.filter_by(symbol='symbol').all()
+    for symbol in symbol_first:
+        symbol.favoritestock()
 
-    return render_template("homepage.html")
+    symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()     
+
+    #get data from db based on counter 
+     
+
+    return render_template("homepage.html", symbol_data=symbol_data)
 
 #-------------------------------------------------------------------------
 

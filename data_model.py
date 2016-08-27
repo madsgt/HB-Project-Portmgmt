@@ -90,8 +90,15 @@ class Favorite(db.Model):
 
     stock = db.relationship('Stock', backref='favorites', order_by='desc(Favorite.counter)')
 
-    count = Model.query.first()
-    count.counter = Model.counter + 1
+    def favoritestock(self):
+
+        self.counter += 1
+        db.session.commit()
+
+
+
+
+    
     def __repr__(self): 
         return "<favorites_id=%s symbol=%s name=%s sector=%s counter=%s>" % (self.favorites_id, self.symbol, self.name, self.sector, self.count.counter)         
 

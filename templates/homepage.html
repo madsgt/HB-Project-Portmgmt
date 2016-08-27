@@ -4,7 +4,39 @@
 
 	
 
-<p><center>Lets get started!!</center></p>
+<p><center>Lets get started!!<br>
+First lets see what the visitors to this site have liked so far : </center></p>
+
+<!-- Need to display a list of symbols with 5 stars for highest frequency in database, 4stars for the second symbol and 3 star for the symbol after that and so on
+limit to showing 5 symbols -->
+<div class="well spaced" style="width:50%;">
+    <h2>Favorite Stocks: </h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Sector</th>
+            <th>Rating</th>        
+            </tr>
+
+            </thead>
+        <tbody>
+    {% for data in symbol_data %}
+        <tr>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+            <td>{{ data.symbol }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.sector }}</td>
+            <td>{{ data.counter}}</td>
+        </tr>
+
+           {% endfor %}
+           <br>
+
+
+
 
 <center>
 	  <a href="/start" class="btn btn-lg btn-primary">CLICK HERE!</a></center></button>

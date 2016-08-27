@@ -115,13 +115,7 @@ once the user enters info he is taken back or to user_list.html -->
 
 	  }
 	};
-	//want to limit users to choosing 5 stocks only
-	 $(".chosen-select").chosen({max_selected_options: 5});
-	 //once he tries to exceed 5 wnat to give him a alert
-	 $(".chosen-select").bind("chosen:maxselected", function () { /*WRITE THIS AN ALERT*/
-	 	... }); 
-	 //make the box flexible with the width
-	 $(".chosen-select").chosen({width: "95%"});
+
 
 
 
@@ -131,6 +125,14 @@ input.placeholder = "Loading symbols...";
 // Set up and make the request.
 request.open('GET','/static/symbols.json', true);
 request.send();
+
+	//want to limit users to choosing 5 stocks only
+	 $(".chosen-select").chosen({max_selected_options: 5});
+	 //once he tries to exceed 5 wnat to give him a alert
+	 $(".chosen-select").bind("chosen:maxselected", function () { /*WRITE THIS AN ALERT*/
+	 	... }); 
+	 //make the box flexible with the width
+	 $(".chosen-select").chosen({width: "95%"});
 
 </script>
 </div> 

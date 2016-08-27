@@ -6,7 +6,7 @@ from cvxopt import matrix, solvers, blas, printing
 import pandas as pd
 from math import sqrt
 import yahoo_api
-import matplotlib.pyplot
+# import matplotlib.pyplot
 import utils
 import mpld3
 
@@ -103,10 +103,10 @@ def optimal_portfolio(returns):
     [0.0]"""
 
 # to plot the efficient frontier in the front page 
-matplotlib.pyplot.plot(stds, means, 'o')
-matplotlib.pyplot.ylabel('mean')
-matplotlib.pyplot.xlabel('std')
-matplotlib.pyplot.plot(risks, returns, 'y-o')
+# matplotlib.pyplot.plot(stds, means, 'o')
+# matplotlib.pyplot.ylabel('mean')
+# matplotlib.pyplot.xlabel('std')
+# matplotlib.pyplot.plot(risks, returns, 'y-o')
   
 
     # return numpy.asarray(wt), returns, risks 
