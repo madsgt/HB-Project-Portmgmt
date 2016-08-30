@@ -127,8 +127,10 @@ def show_list(stockstring):
 def results():
     """ get stocklist out of the form and send stocklist to results.html"""
 
-    
+    # symbol_list = []
     symbols = request.form.getlist('symbol')
+    # symbol_list.append(symbol) #changed symbols to symbol and made empty list
+
     gender = request.form.get('gender')
     agegroup = request.form.get('agegroup')
     income = request.form.get('income')
@@ -137,14 +139,14 @@ def results():
     returnexpectation = request.form.get('returnexpectation')
 
     print symbols
-   
+    print "I am server related"
 
     userdata = UserData(gender=gender, agegroup=agegroup, income=income, 
         amounttoinvest=amounttoinvest, riskexpectation=riskexpectation, 
         returnexpectation=returnexpectation)
 
     # need for loop to check fovarites table and add the symbol and counter to the table
-    for symbol in symbols:
+    for symbol in symbols: # from symbols to symbol_list
         check = Favorite.query.filter_by(symbol=symbol).first()
         if check:
             check.counter +=1
@@ -157,10 +159,12 @@ def results():
 
     db.session.commit()
     
-    final = optimization.final_portfolio(symbols) 
+    final = optimization.final_portfolio(symbols) #from symbols to symbol_list
+    print final
+    print "I am server related"
 
 
-    return render_template("results.html", symbol_list=symbols, final=final) 
+    return render_template("results.html", symbol_list=symbols, final=final) # from =symbols to =symbol_list
     # put in html using jinja and hide it and select using use ajac to send data to next route
     # not sure of passing yahooapidata in render template
    
@@ -169,47 +173,49 @@ def results():
 
 @app.route("/final.json")
 def stock_pie_data():
-    """Return page with results of the stock pie allocation in form of a
-    pie chart."""
- #ajax request , REQUEST.ARGS.GET (GET THE STOCKLIST OUT)
-    #use session
+#     """Return page with results of the stock pie allocation in form of a
+#     pie chart."""
+#  #ajax request , REQUEST.ARGS.GET (GET THE STOCKLIST OUT)
+#     #use session
         
 
     symbols = request.form.getlist('symbol')
-    weights = optimization.final_portfolio(symbols)
+#     # weights = optimization.final_portfolio(symbols)
 
-    # weights = {'GOOG': 0.09984881968219586, 'YHOO': 0.29996987179127077, 'AAPL': 0.2999752441661823, 'AA': 0.2999938062886864, 
-    # 'MSFT': 0.00021225807166471572}
+#     # weights = {'GOOG': 0.09984881968219586, 'YHOO': 0.29996987179127077, 'AAPL': 0.2999752441661823, 'AA': 0.2999938062886864, 
+#     # 'MSFT': 0.00021225807166471572}
 
-    labels = set([]) # store the keys in the label set
+#     labels = set([]) # store the keys in the label set
 
-    for key in weights:
-        labels.add(key)
+#     for key in weights:
+#         labels.add(key)
 
-    data = []
-    for value in weights:
-        # print "value", value
-        rounded_value = int(weights[value]*100)
-        data.append(rounded_value)
-        print data
+#     data = []
+#     for value in weights:
+#         # print "value", value
+#         rounded_value = int(weights[value]*100)
+#         data.append(rounded_value)
+#         print data
  
    
-    backgroundColors = CHARTJS_COLORS[:len(labels)]
-    hoverBackgroundColors = CHARTJS_COLORS[:len(labels)]
+#     backgroundColors = CHARTJS_COLORS[:len(labels)]
+#     hoverBackgroundColors = CHARTJS_COLORS[:len(labels)]
  
-    #  [0.0998488196821958, 0.29996987179127077, 0.2999752441661823, 0.2999938062886864, 0.00021225807166471572]   
+#     #  [0.0998488196821958, 0.29996987179127077, 0.2999752441661823, 0.2999938062886864, 0.00021225807166471572]   
  
-    data_list_of_dicts = {
+#     data_list_of_dicts = {
 
-                    "labels": list(labels),
-                    "datasets":[{"data": data,
-                    "backgroundColor": backgroundColors,
-                    "hoverBackgroundColor": hoverBackgroundColors}]
-                    }
+#                     "labels": list(labels),
+#                     "datasets":[{"data": data,
+#                     "backgroundColor": backgroundColors,
+#                     "hoverBackgroundColor": hoverBackgroundColors}]
+#                     }
 
                     
-    print data_list_of_dicts 
-    return jsonify(data_list_of_dicts)
+#     print data_list_of_dicts 
+#     return jsonify(data_list_of_dicts)
+
+    # pass
 
     #----------------------------------------------------------------------------------------------
 

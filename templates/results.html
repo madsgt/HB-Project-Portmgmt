@@ -17,19 +17,27 @@
 
 <!-- ADD A HIDDEN HTML ELEMENT THAT CONTAINS THE STOCKLIST AND USE JINJA TO PUT IT IN -->
 
- <h2>Final Result</h2>
-  <form id="final_vallist" method="POST" action="/final.json">
+<!--  <h2>Final Result</h2>
+  <form id="final_vallist" method="POST" action="/final.json"> -->
 <!--   <form id="final_symbollist" method="post" action="/final.json"> -->
-    <div class="form-group">
+    <!-- <div class="form-group">
 
      {% for symbol in final %} 
- 
-      <input type="checkbox" name="symbol" id= "{{symbol}}" value="{{symbol}}" checked="checked" style= "display:none"> 
-  {% endfor %}
 
-</div>
+     <input type="checkbox" name="symbol" id= "{{symbol}}" value="{{symbol}}" checked="checked" style= "display:none"> 
+
+  {% endfor %}
+ -->
+<!-- </div>
 </form>
-<script src="/static/js/submitresultsforchart.js"></script>
+<script src="/static/js/submitresultsforchart.js"></script> -->
+
+<!-- <dl>
+      {% for key, value in _dict.iteritems() %}
+            <dt>{{ key }}</dt>
+            <dd>{{ value }}</dd>
+      {% endfor %}
+</dl> -->
 
 <h2><center> Stock Pie </center> </h2>
  <!--Div that will hold the pie chart-->

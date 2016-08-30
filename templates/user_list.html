@@ -45,7 +45,7 @@ we go to results.html page -->
             </form>
              <p>OR</p>    
             <form action='/final' method="POST">
-                 <!--hidden form inputs, do we need a for loop to collect symbols-->
+                 
                  {% for stock in symbol_info_list %}
                  <input type="checkbox" name="symbol" value="{{stock.symbol}}" checked="checked" style= "display:none"> 
                  {% endfor %}
@@ -53,10 +53,10 @@ we go to results.html page -->
                 <input type="hidden" id="gender" name="gender" value='{{session["g_values"]["gender"]}}'>
                 <input type="hidden" id="agegroup" name="agegroup" value='{{session["g_values"]["agegroup"]}}'>
                 <input type="hidden" id="income" name="income" value='{{session["g_values"]["income"]}}'>
-                <input type="hidden" id="amounttoinvest" name="amounttoinvest" value='{{session["g_values"]["amounttoinvest"]}}'>
+                <input type="hidden" id="amounttoinvest" name="amounttoinvest" value='{{session["g_values"]["amounttoinvest"]}}'> <!-- check why val shows none -->
                 <input type="hidden" id="riskexpectation" name="riskexpectation" value='{{session["g_values"]["riskexpectation"]}}'>
                 <input type="hidden" id="returnexpectation" name="returnexpectation" value='{{session["g_values"]["returnexpectation"]}}'>
-                <!-- <input =hidden input check web pattern lecture -->
+               
             <input type="submit" value="Go for It">  <!--To move to results Page  --> 
             </form>
             </div>

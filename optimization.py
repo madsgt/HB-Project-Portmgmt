@@ -82,6 +82,11 @@ def optimal_portfolio(returns):
     mus = [10**(5.0 * t/N - 1.0) for t in range(N)]
     # Convert to cvxopt matrices
     S = matrix(numpy.cov(returns))
+    print S # extra print stmts
+    print "I am opt related"
+    #######FIXME ABOVE #########################
+
+
     pbar = matrix(numpy.mean(returns, axis=1))
     
     # Create constraint matrices
@@ -136,12 +141,16 @@ def optimal_portfolio(returns):
 
 
 def final_portfolio(symbols):
-    yahooapidata = yahoo_api.get_all_stock_data(symbols) # this gets api data for all the symbols, have changed it from symbol_list coming from /final route check if it works
+    yahooapidata = yahoo_api.get_all_stock_data(symbols) # this gets api data for all the symbols, have changed it from symbol_list coming from /final route check if it works, reverted back to symbol_list
     historicalreturns = historical_returns(yahooapidata) # calcultes the returns for the symbols, output is a dictionary
-
+    # print historicalreturns
    
     my_portfolio_values = optimal_portfolio(historicalreturns[0]) # take the returns as values and pass into the function
+    print my_portfolio_values
+    print "I am opt related"
     my_tickers = historicalreturns[1] # the key is stored separately
+    print my_tickers
+    print "I am opt related"
     
     # new_valuelist = []
     # for value in my_portfolio_values:
@@ -171,4 +180,5 @@ def final_portfolio(symbols):
 if __name__ == "__main__":
     import algorithm_server
     print final_portfolio(["GOOG","YHOO","MSFT","AA","AAPL"])
+    # print historical_returns(["^GSPC"])
     

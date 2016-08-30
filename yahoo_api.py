@@ -67,6 +67,8 @@ def get_all_stock_data(tickers):
 
 if __name__=="__main__":
 
-    test = get_all_stock_data(["GOOG","YHOO","AAPL","MSFT","AA"]) 
+    test = get_all_stock_data(["^GSPC"]) 
     # need to pull data for 2 to 5 stocks and store this ,make this dynamic
+    # check if we can get S&P -GSPC as one data pt for comparison
     printer.pprint(test)
+    # "GOOG","YHOO","AAPL","MSFT","AA"
