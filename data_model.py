@@ -100,7 +100,7 @@ class Favorite(db.Model):
 
     
     def __repr__(self): 
-        return "<favorites_id=%s symbol=%s name=%s sector=%s counter=%s>" % (self.favorites_id, self.symbol, self.name, self.sector, self.count.counter)         
+        return "<favorites_id=%s symbol=%s counter=%s>" % (self.favorites_id, self.symbol, self.count.counter)         
 
 # def example_data():
 #     """Create some sample data."""

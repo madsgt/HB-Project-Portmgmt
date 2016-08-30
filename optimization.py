@@ -8,7 +8,7 @@ from math import sqrt
 import yahoo_api
 # import matplotlib.pyplot
 import utils
-import mpld3
+# import mpld3
 
 
 
@@ -44,9 +44,27 @@ def historical_returns(yahooapidata):
                 return_values.append(returns)
             new_dict[key] = return_values
 
+                
+
+
     return new_dict.values(), new_dict.keys()
+
     """ The result is like ([[0.006819861154621076, 0.0009968419278234553, 0.0020811586276570093, -0.0002165802448849119], [-1.96, -1.7833333333333332, 0.8676063829787235, -2.1107630087436986]], ['GOOG', 'YHOO'])
     """
+    # means = [] 
+    # for value in my_dict.values():
+    #     one_mean = mean(value)
+    #     means.append(one_mean)
+    # return means
+
+    # stds = []
+    # for value in my_dict.values():
+    #     one_stdev = numpy.std(value)
+    #     stds.append(one_stdev)
+    # return stds
+
+
+
 
 #-------------------------------------------------------------
 
@@ -117,8 +135,8 @@ def optimal_portfolio(returns):
 
 
 
-def final_portfolio(symbol_list):
-    yahooapidata = yahoo_api.get_all_stock_data(symbol_list) # this gets api data for all the symbols
+def final_portfolio(symbols):
+    yahooapidata = yahoo_api.get_all_stock_data(symbols) # this gets api data for all the symbols, have changed it from symbol_list coming from /final route check if it works
     historicalreturns = historical_returns(yahooapidata) # calcultes the returns for the symbols, output is a dictionary
 
    

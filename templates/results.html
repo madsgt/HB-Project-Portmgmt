@@ -13,20 +13,33 @@
 
 {% block content %}
   	
- 
-<!-- <script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
-<script src="node_modules/chart.js/Chart.min.js"></script> -->
+
+
 <!-- ADD A HIDDEN HTML ELEMENT THAT CONTAINS THE STOCKLIST AND USE JINJA TO PUT IT IN -->
+
+ <h2>Final Result</h2>
+  <form id="final_vallist" method="POST" action="/final.json">
+<!--   <form id="final_symbollist" method="post" action="/final.json"> -->
+    <div class="form-group">
+
+     {% for symbol in final %} 
+ 
+      <input type="checkbox" name="symbol" id= "{{symbol}}" value="{{symbol}}" checked="checked" style= "display:none"> 
+  {% endfor %}
+
+</div>
+</form>
+<script src="/static/js/submitresultsforchart.js"></script>
 
 <h2><center> Stock Pie </center> </h2>
  <!--Div that will hold the pie chart-->
 <div class="stock-chart">
-<canvas id="donutChart" height="600" width="600"></canvas></div>
+<canvas id="donutChart" height="300" width="300"></canvas></div>
 <!-- <div id="donutLegend" class="chart-legend"></div> -->
 
 
 	<script>
-	var options = {
+/*	var options = {
       responsive: true,
 
        tooltips: {
@@ -45,7 +58,7 @@
      
     };
 
-    // Make Donut Chart of percent of different types of Melons
+    
     var ctx_donut = $("#donutChart").get(0).getContext("2d");
       $.get("/final.json", function (data) { console.log(data)
           var myDonutChart = new Chart(ctx_donut, {
@@ -53,6 +66,41 @@
       data: data,
       options: options
       }); console.log(myDonutChart)
+           });*/
+      
+       /*Ajax lecture , jquery from html to */
+
+      var options = {
+      responsive: true,
+
+      /*Solution below was received from github issues- https://github.com/chartjs/Chart.js/issues/777
+      http://blog.cryst.co.uk/2016/06/03/adding-percentages-chart-js-pie-chart-tooltips/*/
+      tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var allData = data.datasets[tooltipItem.datasetIndex].data;
+                    var tooltipLabel = data.labels[tooltipItem.index];
+                    var tooltipData = allData[tooltipItem.index];
+                    var total = 0;
+                    for (var i in allData) {
+                        total += allData[i];
+                    }
+                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
+                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
+                }}} 
+     
+    };
+
+    // Make Donut Chart of percent of different types of Melons
+    var ctx_donut = $("#donutChart").get(0).getContext("2d");
+      $.get("/final.json", function (data) { console.log(data)
+        console.log(ctx_donut)
+          var myDonutChart = new Chart(ctx_donut, {
+      type: 'doughnut',
+      data: data,
+      options: options
+      }); console.log(myDonutChart)
+          $('#donutLegend').html(myDonutChart.generateLegend());
            });
 
   	

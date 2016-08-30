@@ -63,3 +63,16 @@ p.error {
     bottom: 0;
     width: 100%;  /* required because fixed position 
 } */
+
+/* Navbar styles */
+.navbar {
+    background-color: #80dfff;
+}
+
+.navbar-default .navbar-nav li a {
+    color: white;
+}
+
+.navbar-default .navbar-brand {
+   color: black;
+}

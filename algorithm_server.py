@@ -36,11 +36,12 @@ CHARTJS_COLORS = ["#b366ff", "#0059b3", "#00cc99", "#ffd480",
 def index():
     """Return homepage."""
 
-    symbol_first = Favorite.query.filter_by(symbol='symbol').all()
-    for symbol in symbol_first:
-        symbol.favoritestock()
+    # symbol_first = Favorite.query.all()
+    # for symbol in symbol_first:
+    #     symbol.favoritestock()
 
-    symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()     
+    symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()
+    # need data from stocks table too query qith join     
 
     #get data from db based on counter 
      
@@ -126,10 +127,8 @@ def show_list(stockstring):
 def results():
     """ get stocklist out of the form and send stocklist to results.html"""
 
-    # request.form.getlist()
-    symbol_list = []
-    symbol = request.form.get('symbol')
-    symbol_list.append(symbol)
+    
+    symbols = request.form.getlist('symbol')
     gender = request.form.get('gender')
     agegroup = request.form.get('agegroup')
     income = request.form.get('income')
@@ -137,21 +136,32 @@ def results():
     riskexpectation = request.form.get('riskexpectation')
     returnexpectation = request.form.get('returnexpectation')
 
+    print symbols
+   
+
     userdata = UserData(gender=gender, agegroup=agegroup, income=income, 
         amounttoinvest=amounttoinvest, riskexpectation=riskexpectation, 
         returnexpectation=returnexpectation)
 
-    favorite = Favorite(symbol=symbol)
+    # need for loop to check fovarites table and add the symbol and counter to the table
+    for symbol in symbols:
+        check = Favorite.query.filter_by(symbol=symbol).first()
+        if check:
+            check.counter +=1
+        else:
+            favorite = Favorite(symbol=symbol)
+            db.session.add(favorite)
 
     db.session.add(userdata)
-    db.session.add(favorite) # add to the session for storing
+     # add to the session for storing
 
     db.session.commit()
     
-    final = optimization.final_portfolio(symbol_list)
+    final = optimization.final_portfolio(symbols) 
 
 
-    return render_template("results.html", symbol_list=symbol_list, final=final)
+    return render_template("results.html", symbol_list=symbols, final=final) 
+    # put in html using jinja and hide it and select using use ajac to send data to next route
     # not sure of passing yahooapidata in render template
    
     # need to send the stocklist to yahoo_api.py and that data to optimization
@@ -162,10 +172,14 @@ def stock_pie_data():
     """Return page with results of the stock pie allocation in form of a
     pie chart."""
  #ajax request , REQUEST.ARGS.GET (GET THE STOCKLIST OUT)
+    #use session
+        
 
-    # weights = results(final)
-    weights = {'GOOG': 0.09984881968219586, 'YHOO': 0.29996987179127077, 'AAPL': 0.2999752441661823, 'AA': 0.2999938062886864, 
-    'MSFT': 0.00021225807166471572}
+    symbols = request.form.getlist('symbol')
+    weights = optimization.final_portfolio(symbols)
+
+    # weights = {'GOOG': 0.09984881968219586, 'YHOO': 0.29996987179127077, 'AAPL': 0.2999752441661823, 'AA': 0.2999938062886864, 
+    # 'MSFT': 0.00021225807166471572}
 
     labels = set([]) # store the keys in the label set
 
@@ -199,11 +213,11 @@ def stock_pie_data():
 
     #----------------------------------------------------------------------------------------------
 
-@app.route("/test")
-def test_results():
+# @app.route("/test")
+# def test_results():
 
 
-    return render_template("test_chart.html")
+#     return render_template("test_chart.html")
 
 
 

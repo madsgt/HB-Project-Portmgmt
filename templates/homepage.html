@@ -3,17 +3,22 @@
 {% block content %}
 
 	
-
+<div class="container">
 <p><center>Lets get started!!<br>
-First lets see what the visitors to this site have liked so far : </center></p>
+
+   <a href="/start" class="btn btn-lg btn-primary">CLICK HERE!</a></button><br>
+      You may check below to see what the visitors to this site have liked so far : </center></p>
 
 <!-- Need to display a list of symbols with 5 stars for highest frequency in database, 4stars for the second symbol and 3 star for the symbol after that and so on
 limit to showing 5 symbols -->
-<div class="well spaced" style="width:50%;">
-    <h2>Favorite Stocks: </h2>
+ <div class="row"> 
+
+<!-- <div class="well spaced" style="width:50%;"> -->
+    
 
 <table class="table table-striped">
     <thead>
+        <tr><center><b>Favorite Stocks: </b></center></tr>
         <tr>
             <th>Symbol</th>
             <th>Name</th>
@@ -35,16 +40,13 @@ limit to showing 5 symbols -->
            {% endfor %}
            <br>
 
+</div>
+</div>
 
-
-
-<center>
-	  <a href="/start" class="btn btn-lg btn-primary">CLICK HERE!</a></center></button>
-
-<br>      
-<footer>
+          
+<!-- <footer>
  <div align=center><a href='http://www.counter12.com'><img src='http://www.counter12.com/img-2Z4668za-14.gif' border='0' alt='web counter free'></a><script type='text/javascript' src='http://www.counter12.com/ad.js?id=2Z4668za'></script></div> 
-<!-- created a counter for visitors , need to move it to the bottom -->
-</footer>
+created a counter for visitors , need to move it to the bottom -->
+<!-- </footer> -->
 
 {% endblock %}

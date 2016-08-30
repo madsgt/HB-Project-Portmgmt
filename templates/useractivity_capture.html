@@ -75,8 +75,9 @@ once the user enters info he is taken back or to user_list.html -->
   
 </div> -->
 	
-	<div class="fieldwrapper">
+	<!-- <div class="chosen-select">  --><!-- changed from fieldwrapper -->
 		<!-- <div id="page-wrapper"> -->
+		<div class="fieldwrapper">
     <tr><center><input type="text" id="ajax" list="json-datalist" placeholder="e.g. GOOG">
     	<input type="submit" id="addbutton" value="ADD" />
 		<datalist id="json-datalist"></datalist></center> </tr>
@@ -127,12 +128,13 @@ request.open('GET','/static/symbols.json', true);
 request.send();
 
 	//want to limit users to choosing 5 stocks only
-	 $(".chosen-select").chosen({max_selected_options: 5});
+/*	 $(".chosen-select").chosen({max_selected_options: 5});
 	 //once he tries to exceed 5 wnat to give him a alert
-	 $(".chosen-select").bind("chosen:maxselected", function () { /*WRITE THIS AN ALERT*/
-	 	... }); 
+	 $(".chosen-select").bind("chosen:maxselected", function () { alert("The maximum symbols have been selected")}); */
 	 //make the box flexible with the width
-	 $(".chosen-select").chosen({width: "95%"});
+/*	 $(".chosen-select").chosen({width: "95%"}); */
+
+
 
 </script>
 </div> 
