@@ -36,16 +36,12 @@ CHARTJS_COLORS = ["#b366ff", "#0059b3", "#00cc99", "#ffd480",
 def index():
     """Return homepage."""
 
-    # symbol_first = Favorite.query.all()
-    # for symbol in symbol_first:
-    #     symbol.favoritestock()
-
+  
     symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()
-    # need data from stocks table too query qith join     
+    userfavdata = UserFavorite.query.all()
+    # need to create charts of individual userinfo
 
-    #get data from db based on counter 
      
-
     return render_template("homepage.html", symbol_data=symbol_data)
 
 #-------------------------------------------------------------------------
@@ -85,8 +81,7 @@ def user_data():
     session["g_values"] = g_values
 
 
-     # if len(stocklist)<2 or len(stocklist)>5:
-        # flash("Please choose min 2 or max 5 symbols")
+ 
     if len(stocklist)>5:
         flash("Please choose 5 symbols")
         return redirect("/start")
@@ -127,13 +122,9 @@ def show_list(stockstring):
 def results():
     """ get stocklist out of the form and send stocklist to results.html"""
 
-    # symbol_list = []
     symbols = request.form.getlist('symbol')
-    g.symbols = symbols # 30-aug addition
-    session["symbols"] = symbols # 30-aug addition
-
-
-    # symbol_list.append(symbol) #changed symbols to symbol and made empty list
+    g.symbols = symbols 
+    session["symbols"] = symbols 
 
     gender = request.form.get('gender')
     agegroup = request.form.get('agegroup')
@@ -147,10 +138,10 @@ def results():
 
     userdata = UserData(gender=gender, agegroup=agegroup, income=income, 
         amounttoinvest=amounttoinvest, riskexpectation=riskexpectation, 
-        returnexpectation=returnexpectation)
+        returnexpectation=returnexpectation) 
 
-    # need for loop to check fovarites table and add the symbol and counter to the table
-    for symbol in symbols: # from symbols to symbol_list
+    #loops over each symbol to check fovarites table,if present we increase counter else add the symbol and counter to the table in not present
+    for symbol in symbols: 
         check = Favorite.query.filter_by(symbol=symbol).first()
         if check:
             check.counter +=1
@@ -158,8 +149,10 @@ def results():
             favorite = Favorite(symbol=symbol)
             db.session.add(favorite)
 
-    db.session.add(userdata)
-     # add to the session for storing
+        userfavorite = UserFavorite(favorite_id = favorite_id, user_id=user_id)
+            
+
+    db.session.add(userdata)  # add to the session for storing
 
     db.session.commit()
     

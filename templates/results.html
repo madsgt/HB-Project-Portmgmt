@@ -20,41 +20,12 @@
 <h2><center> Stock Pie </center> </h2>
  <!--Div that will hold the pie chart-->
 <div class="stock-chart">
-<canvas id="donutChart" height="300" width="300"></canvas></div>
-<!-- <div id="donutLegend" class="chart-legend"></div> -->
+<canvas id="donutChart" height="150" width="150"></canvas></div>
+
 
 
 	<script>
-/*	var options = {
-      responsive: true,
 
-       tooltips: {
-            callbacks: {
-                label: function(tooltipItem, data) {
-                    var allData = data.datasets[tooltipItem.datasetIndex].data;
-                    var tooltipLabel = data.labels[tooltipItem.index];
-                    var tooltipData = allData[tooltipItem.index];
-                    var total = 0;
-                    for (var i in allData) {
-                        total += allData[i];
-                    }
-                    var tooltipPercentage = Math.round((tooltipData / total) * 100);
-                    return tooltipLabel + ': ' + tooltipData + ' (' + tooltipPercentage + '%)';
-                }}}   
-     
-    };
-
-    
-    var ctx_donut = $("#donutChart").get(0).getContext("2d");
-      $.get("/final.json", function (data) { console.log(data)
-          var myDonutChart = new Chart(ctx_donut, {
-      type: 'doughnut',
-      data: data,
-      options: options
-      }); console.log(myDonutChart)
-           });*/
-      
-       /*Ajax lecture , jquery from html to */
 
       var options = {
       responsive: true,

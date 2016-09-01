@@ -72,11 +72,15 @@ class UserData(db.Model):
     amounttoinvest = db.Column(db.String(50), nullable=False)
     riskexpectation = db.Column(db.String(50), nullable=False)
     returnexpectation = db.Column(db.String(50), nullable=False)
+    # symbol = db.Column(db.String(6), db.ForeignKey('favorites.symbol')) # added on 31st Aug
+
+    # userinfo = db.relationship('Favorite', backref='userdata') # added on 31st Aug
 
 
     def __repr__(self): 
         """Provide helpful representation when printed.""" 
         return "<user_id=%s gender=%s agegroup=%s income=%s amounttoinvest=%s riskexpectation=%s returnexpectation=%s>" % (self.user_id, self.gender, self.agegroup, self.income, self.amounttoinvest, self.riskexpectation, self.returnexpectation)
+        
 
 #--------------------------------------------------------------------------------------------
 class Favorite(db.Model):
@@ -86,21 +90,34 @@ class Favorite(db.Model):
 
     favorites_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     symbol = db.Column(db.String(6), db.ForeignKey('stocks.symbol'))
-    counter = db.Column(db.Integer, nullable=True, default=1)#fixme need to calculate if symbol already in db increment by one the same row
+    counter = db.Column(db.Integer, nullable=True, default=1)
 
     stock = db.relationship('Stock', backref='favorites', order_by='desc(Favorite.counter)')
+    # userdata = db.relationship('UserData', backref='favorites', order_by='desc(Favorite.counter)') # added on 31st AUg ,need to create a chart of the userdata display against the stock counter
 
     def favoritestock(self):
 
         self.counter += 1
         db.session.commit()
 
-
-
-
-    
     def __repr__(self): 
-        return "<favorites_id=%s symbol=%s counter=%s>" % (self.favorites_id, self.symbol, self.count.counter)         
+        return "<favorites_id=%s symbol=%s counter=%s>" % (self.favorites_id, self.symbol, self.count.counter)
+
+
+class UserFavorite(db.Model): #added on 31st Aug
+
+    __tablename__ = "userfavorites"
+
+    user_id = db.Column(db.Integer, db.ForeignKey('userdata.user_id'))
+    favorites_id = db.Column(db.Integer, db.ForeignKey('favorites.favorites_id'))
+    userfav_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    user = db.relationship("UserData", backref='userfavorites')
+    favorite = db.relationship("Favorite", backref='userfavorites') #order_by='desc(Favorite.counter)' if reqd
+
+    def __repr__(self): 
+        return "<favorites_id=%s user_id=%s userfav_id=%s>" % (self.favorites_id, self.user_id, self.userfav_id)
+
 
 # def example_data():
 #     """Create some sample data."""
