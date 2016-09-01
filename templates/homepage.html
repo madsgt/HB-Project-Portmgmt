@@ -23,7 +23,8 @@ limit to showing 5 symbols -->
             <th>Symbol</th>
             <th>Name</th>
             <th>Sector</th>
-            <th>Rating</th>        
+            <th>Rating</th>
+            <th>Visitor Breakup</th> <!--#added 31 aug -->       
             </tr>
 
             </thead>
@@ -35,10 +36,14 @@ limit to showing 5 symbols -->
             <td>{{ data.stock.name }}</td>
             <td>{{ data.stock.sector }}</td>
             <td>{{ data.counter}}</td>
+    {% endfor %}
+    
         </tr>
 
            {% endfor %}
            <br>
+
+
 
 </div>
 </div>

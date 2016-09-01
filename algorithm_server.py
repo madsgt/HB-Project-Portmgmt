@@ -10,7 +10,7 @@ import jinja2
 import optimization
 import yahoo_api
 import json
-from data_model import Stock, YahooData, UserData, connect_to_db, db,Favorite
+from data_model import Stock, YahooData, UserData, Favorite, UserFavorite, connect_to_db, db
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy import desc
 
@@ -38,11 +38,11 @@ def index():
 
   
     symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()
-    userfavdata = UserFavorite.query.all()
+    userfavdata = UserFavorite.query.all() #added on 3st aug
     # need to create charts of individual userinfo
 
      
-    return render_template("homepage.html", symbol_data=symbol_data)
+    return render_template("homepage.html", symbol_data=symbol_data, userfavdata=userfavdata)
 
 #-------------------------------------------------------------------------
 
@@ -149,10 +149,11 @@ def results():
             favorite = Favorite(symbol=symbol)
             db.session.add(favorite)
 
-        userfavorite = UserFavorite(favorite_id = favorite_id, user_id=user_id)
+        userfavorite = UserFavorite(favorites_id = favorites.favorites_id, user_id=userdata.user_id) #added on 31st aug
             
 
     db.session.add(userdata)  # add to the session for storing
+    db.session.add(userfavorite) #added 31 Aug
 
     db.session.commit()
     
