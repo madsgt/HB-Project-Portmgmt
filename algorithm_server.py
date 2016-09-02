@@ -38,14 +38,14 @@ def index():
 
   
     symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()
-    userfavdata = UserFavorite.query.all() #added on 3st aug
-    print userfavdata
+    # userfavdata = UserFavorite.query.all() #added on 31st aug
+    # print userfavdata
     # need to create charts of individual userinfo, construct a dictionary here and send it to html and in JS for each favorite in table get the dictionary json and create the
 
     #hidden div 
 
      
-    return render_template("homepage.html", symbol_data=symbol_data, userfavdata=userfavdata)
+    return render_template("homepage.html", symbol_data=symbol_data) # removed userfavdata=userfavdata 2nd sept
 
 #-------------------------------------------------------------------------
 
@@ -152,16 +152,16 @@ def results():
             favorite = Favorite(symbol=symbol)
             db.session.add(favorite)
 
-        userfavorite = UserFavorite(favorites_id = Favorite.favorites_id, user_id=userdata.user_id) #added on 31st aug
-        print userfavorite
+        # userfavorite = UserFavorite(favorites_id = Favorite.favorites_id, user_id=userdata.user_id) #added on 31st aug
+        # print userfavorite
             
 
     db.session.add(userdata)  # add to the session for storing
-    db.session.add(userfavorite) #added 31 Aug
+    # db.session.add(userfavorite) #added 31 Aug
 
     db.session.commit()
     
-    final = optimization.final_portfolio(symbols) #from symbols to symbol_list
+    final = optimization.final_portfolio(symbols) 
     print final
     print "I am server related"
 
@@ -235,7 +235,8 @@ def user_pie_data():
 
     # data:[list of objects thats all the ]
 
-    return jsonify({'1':1})
+    # return jsonify({'1':1})
+    pass
 
    
     # query , for loop go thru for each userfav

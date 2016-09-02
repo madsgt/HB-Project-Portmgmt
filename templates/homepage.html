@@ -24,7 +24,7 @@ limit to showing 5 symbols -->
             <th>Name</th>
             <th>Sector</th>
             <th>Rating</th>
-            <th>Visitor Breakup</th> <!--#added 31 aug -->       
+           <!--  <th>Visitor Breakup</th> --> <!--#added 31 aug -->       
             </tr>
 
             </thead>
@@ -41,17 +41,6 @@ limit to showing 5 symbols -->
 </div>
 </div>
  </tr>
-
-<div class="linkuser" id="userfav" style="display: none;" >
-    {% for fav in userfavdata %}
-
-    <li class="favs" data-fav='{{ fav.favorite.favorites_id }}'></li>
-       
-    {% endfor %} 
-</div>
-
-
-<script src="/static/js/submitresultsforchart.js"></script>
 
 
 
