@@ -39,7 +39,10 @@ def index():
   
     symbol_data = Favorite.query.order_by(desc(Favorite.counter)).limit(5).all()
     userfavdata = UserFavorite.query.all() #added on 3st aug
-    # need to create charts of individual userinfo
+    print userfavdata
+    # need to create charts of individual userinfo, construct a dictionary here and send it to html and in JS for each favorite in table get the dictionary json and create the
+
+    #hidden div 
 
      
     return render_template("homepage.html", symbol_data=symbol_data, userfavdata=userfavdata)
@@ -149,7 +152,8 @@ def results():
             favorite = Favorite(symbol=symbol)
             db.session.add(favorite)
 
-        userfavorite = UserFavorite(favorites_id = favorites.favorites_id, user_id=userdata.user_id) #added on 31st aug
+        userfavorite = UserFavorite(favorites_id = Favorite.favorites_id, user_id=userdata.user_id) #added on 31st aug
+        print userfavorite
             
 
     db.session.add(userdata)  # add to the session for storing
@@ -212,6 +216,39 @@ def stock_pie_data():
                     
     print data_list_of_dicts 
     return jsonify(data_list_of_dicts)
+
+@app.route("/userfav.json") #added on 1st sept
+def user_pie_data():
+
+    data = request.args.get('favs')
+    print data
+    import pdb; pdb.set_trace()
+    # for i in data:
+    #     i.favorites_id
+    #     print "I AM i"
+    #     print i
+    #     print "I AM i"
+    #     favinfo = Favorite.query.get(Favorite.userfavorites.user_id)
+    #     print favinfo
+
+# result of userfavdata=[<favorites_id=1 user_id=1 userfav_id=1>, <favorites_id=2 user_id=2 userfav_id=2>]
+
+    # data:[list of objects thats all the ]
+
+    return jsonify({'1':1})
+
+   
+    # query , for loop go thru for each userfav
+    # favorite = Favorite.query.get( id we get from the javascript)
+    # Favorite.userfavorites (a list of objects)
+    # loop through each to get data 
+
+
+    # ---------------------------------
+    # construct the chart data for individual ticker 
+
+
+    # return "success" replace later get json
 
     
 

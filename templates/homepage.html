@@ -36,22 +36,29 @@ limit to showing 5 symbols -->
             <td>{{ data.stock.name }}</td>
             <td>{{ data.stock.sector }}</td>
             <td>{{ data.counter}}</td>
-    {% endfor %}
-    
-        </tr>
-
-           {% endfor %}
-           <br>
-
-
+            {% endfor %}
 
 </div>
 </div>
+ </tr>
 
-          
-<!-- <footer>
- <div align=center><a href='http://www.counter12.com'><img src='http://www.counter12.com/img-2Z4668za-14.gif' border='0' alt='web counter free'></a><script type='text/javascript' src='http://www.counter12.com/ad.js?id=2Z4668za'></script></div> 
-created a counter for visitors , need to move it to the bottom -->
-<!-- </footer> -->
+<div class="linkuser" id="userfav" style="display: none;" >
+    {% for fav in userfavdata %}
+
+    <li class="favs" data-fav='{{ fav.favorite.favorites_id }}'></li>
+       
+    {% endfor %} 
+</div>
+
+
+<script src="/static/js/submitresultsforchart.js"></script>
+
+
+
+
+
+  
+       
+
 
 {% endblock %}
