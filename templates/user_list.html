@@ -45,11 +45,15 @@ we go to results.html page -->
 
       
             <div id="frm">
-           
+        <div style="width:400px;">
+        <div style="float: left; width:5px">
             <form action='/start'>
             <input type="submit" value="Go Back"> <!--To Return to Previous Page  -->
-            </form>
+             </div>
+         </form>
+       
              <p>OR</p>    
+            
             <form action='/final' method="POST">
                  
                  {% for stock in symbol_info_list %}
@@ -62,9 +66,13 @@ we go to results.html page -->
                 <input type="hidden" id="amounttoinvest" name="amounttoinvest" value='{{session["g_values"]["amounttoinvest"]}}'> 
                 <input type="hidden" id="riskexpectation" name="riskexpectation" value='{{session["g_values"]["riskexpectation"]}}'>
                 <input type="hidden" id="returnexpectation" name="returnexpectation" value='{{session["g_values"]["returnexpectation"]}}'>
-               
+             
+            <div style="float: right; width:5px">
             <input type="submit" value="Go for It">  <!--To move to results Page  --> 
-            </form>
+            </div>
+        </form>
+        
+    </div>
             </div>
             </div>
              </div>

@@ -18,7 +18,11 @@ limit to showing 5 symbols -->
 
 <table class="table table-striped">
     <thead>
+       
         <tr><center><b>Favorite Stocks: </b></center></tr>
+    </div>
+
+         <div class="row"> 
         <tr>
             <th>Symbol</th>
             <th>Name</th>
@@ -26,18 +30,23 @@ limit to showing 5 symbols -->
             <th>Rating</th>
            <!--  <th>Visitor Breakup</th> --> <!--#added 31 aug -->       
             </tr>
-
+        </div>
             </thead>
         <tbody>
     {% for data in symbol_data %}
+        <div class="row"> 
         <tr>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+           
             <td>{{ data.symbol }}</td>
             <td>{{ data.stock.name }}</td>
             <td>{{ data.stock.sector }}</td>
             <td>{{ data.counter}}</td>
+        
             {% endfor %}
 
+
+</div>
 </div>
 </div>
  </tr>

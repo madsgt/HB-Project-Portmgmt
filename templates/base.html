@@ -17,7 +17,8 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+     
 
 
 
@@ -46,6 +47,8 @@ MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md -->
          <span class="icon-bar"></span> 
          </button> 
 
+      
+        
         <a class="navbar-brand" href="/">Your Stock Allocation Homepage!</a> 
         </div> 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
@@ -55,7 +58,7 @@ MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md -->
        <ul class="nav navbar-nav navbar-right"> 
        </ul> 
      </div><!-- /.navbar-collapse  -->
-   </div><!--/.container-fluid  -->
+   </div> <!-- /.container-fluid  -->
  </nav> 
 
 
@@ -67,7 +70,7 @@ MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md -->
   <div class="container"> 
         {% if get_flashed_messages() %} 
             <div class="alert alert-info" role="alert"> 
-               <!-- Show flashed messages --> 
+               <!-- Show flashed messages-->  
                  {% with messages = get_flashed_messages() %} 
                      {% for message in messages %} 
                          <div><span class="glyphicon glyphicon-flash"></span>{{ message }}</div> 
@@ -83,19 +86,19 @@ MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md -->
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 
-<!-- <footer>
-<div id="footer"> -->
 
 
  
+
 <footer class="footer"> 
   <div class="container">
     <font face="arial" size="-2">
     <p class="text-muted">Data and information is provided for informational purposes only, and is not intended for trading purposes. Neither the site or the site owner shall be liable for any errors or delays in the content, or for any actions taken in reliance thereof </p>
    
-  </font> 
-    </div> 
-   </footer> 
+  </font> </div>
+   </footer>
+     
+   
 
 
 </html>
