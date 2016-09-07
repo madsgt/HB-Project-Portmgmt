@@ -2,9 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- User List of Stocks displayed and asks them to either go ahead or go back , once they decide to go ahead
-we go to results.html page -->
-<!-- <form action="/final" method="POST"> -->
+
 <div class="container">
     <div class="row">
         <div class="col-xs-6 col-xs-offset-3">
@@ -35,23 +33,14 @@ we go to results.html page -->
 </div>
 </div>
 
-         
-
-                 
-
-      
-
-    
-            
-            <form action='/start' id="go-back-form">
+        <form action='/start' id="go-back-form">
             <input type="submit" value="Go Back"> <!--To Return to Previous Page  -->
             </form>
      
              <span id="in-between">OR</span>
             
             <form action='/final' method="POST" id="go-ahead">
-                 
-                 {% for stock in symbol_info_list %}
+                {% for stock in symbol_info_list %}
                  <input type="checkbox" name="symbol" value="{{stock.symbol}}" checked="checked" style= "display:none"> 
                  {% endfor %}
               
@@ -64,10 +53,8 @@ we go to results.html page -->
              
            
             <input type="submit" value="Go for It">  <!--To move to results Page  --> 
-            </form>
-        
-   
-            </div>
+            </form>  
+             </div>
             </div>
       
     

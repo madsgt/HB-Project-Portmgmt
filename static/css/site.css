@@ -37,8 +37,19 @@ h1 {
 
 }
 
+.form-group{
+
+  font-weight: bold;
 
 
+}
+
+
+  .button {
+    font-weight: bold;
+
+
+  }
 
     body {
       width: 100%;
@@ -48,11 +59,7 @@ h1 {
        background-size: cover;
        background-position: center center;
        background: url ('../static/dollar.jpg');
-        /*background: url("static/dollar.jpg");*/
-      /* background-image: "static/dollar.jpg";*/
-
-
-        
+          
       
     }
 
