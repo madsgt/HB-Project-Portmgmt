@@ -47,7 +47,8 @@ h1 {
        margin: 8px;
        background-size: cover;
        background-position: center center;
-       /*background: url("static/dollar.jpg");*/
+       background: url ('../static/dollar.jpg');
+        /*background: url("static/dollar.jpg");*/
       /* background-image: "static/dollar.jpg";*/
 
 
