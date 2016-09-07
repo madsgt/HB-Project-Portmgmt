@@ -2,49 +2,120 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- Not sure if I need a form action or a form class, this will capture all the info user enters in the form
-once the user enters info he is taken back or to user_list.html -->
-<form action="/start" method="POST">
-<div class="row">
-<table border="0" cellspacing="4" cellpadding="0">
-	<table style="width:100%">
-	<tbody>
-		<!-- <tr bgcolor="#6699cc"> -->
-			<!-- <td colspan="4"> -->
-				<!-- <table style="width:100%" border="0" cellspacing="0" cellpadding="4"> -->
+<div class= "container">
+	<div class="row">
+		<div class="col-xs-6 col-xs-offset-3">
+	<form action="/start" method="POST">
 	<b><font face="arial" size="+2"><center>Pick Your Stocks.</center></font></b><br>
-	<p><center>Choose your Stock Symbol: <br>
-		Note: Please choose 5 symbols</center></p>
-			<!-- </td> -->
-		<!-- </tr> -->
+		<p><center>Choose your Stock Symbol: <br>
+			Note: Please choose 5 symbols</center></p>
 	
-	<tr>
-	<th>Stocks List:</th> 
-	<td>
-	<select name="stocklist" multiple>
-	  <option value="GOOG">GOOG</option>
-	  <option value="YHOO">YHOO </option>
-	  <option value="AA">AA</option>
-	  <option value="ABT">ABT</option>
-	  <option value="EL">EL</option>
-	  <option value="BA">BA</option>
-	  <option value="GIS">GIS</option>
-	  <option value="COST">COST</option>
-	  <option value="C">C</option>
-	  <option value="PEP">PEP</option>
-	  <option value="AAPL">AAPL</option>
-	  <option value="FDX">FDX</option>
-	  <option value="ABBV">ABBV</option>
-	</select>
-	</td>
-	</tr>
-	<tr>
-	<td>
-		<center><p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p></center>
-	</td>
-	</tr>
-	
+		<div class="form-group">
+		Stocks List: <select name="stocklist" multiple class="form-control">
+		  <option value="GOOG">GOOG</option>
+		  <option value="YHOO">YHOO </option>
+		  <option value="AA">AA</option>
+		  <option value="ABT">ABT</option>
+		  <option value="EL">EL</option>
+		  <option value="BA">BA</option>
+		  <option value="GIS">GIS</option>
+		  <option value="COST">COST</option>
+		  <option value="C">C</option>
+		  <option value="PEP">PEP</option>
+		  <option value="AAPL">AAPL</option>
+		  <option value="FDX">FDX</option>
+		  <option value="ABBV">ABBV</option>
+		</select>
 	</div>
+
+
+		<center><p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p></center>
+
+	
+	<p>Kindly help us with some additional information below:
+	</p>
+	
+	<div class="form-group">
+	Age Group:
+	
+	<select name="agegroup" class="form-control">
+	  <option value="" style="display:none;"></option>		
+	  <option value="20-30 Years">20-30 Years</option>
+	  <option value="30-45 Years">30-45 Years </option>
+	  <option value="45-60 Years">45-60 Years</option>
+	  <option value=">60 Years">>60 Years</option>
+	</select>
+	</div>
+
+	<div class="form-group">
+	Gender:
+	
+	<select name="gender" class="form-control">
+	  <option value="" style="display:none;"></option>	
+	  <option value="male">Male</option>
+	  <option value="female">Female</option>
+	</select>
+	</div>
+	
+
+	<div class="form-group">
+	Annual Income Range:
+	
+	<select name="income" class="form-control">
+	  <option value="" style="display:none;"></option>		
+	  <option value="$45-$80 K">$45-$80 K</option>
+	  <option value="$80-$120 K">$80-$120 K</option>
+	  <option value="$120-$200 K">$120-$200 K</option>
+	  <option value=">$200 K">>$200 K</option>
+	</select>
+	</div>
+	
+
+	<div class="form-group">
+	Investible Surplus:
+	
+	<select name="amounttotinvest"class="form-control">
+	  <option value="" style="display:none;"></option>		
+	  <option value="$1-$5 K">$1-$5 K</option>
+	  <option value="$5-$10 K">$5-$10 K</option>
+	  <option value=">$10 K">>$10 K</option>
+	</select>
+	</div>
+	
+
+	<div class="form-group">
+	Risk Expectations:
+	
+	<select name="riskexpectation" class="form-control">
+	  <option value="" style="display:none;"></option>		
+	  <option value="Risk Averse">Risk Averse</option>
+	  <option value="Risk Neutral">Risk Neutral</option>
+	  <option value="Risk Taker">Risk Taker</option>
+	</select>
+	</div>
+	
+
+	<div class="form-group">
+	Return Expectations:
+	
+	<select name="returnexpectation" class="form-control">
+	  <option value="" style="display:none;"></option>		
+	  <option value="Normal Return">Normal Return</option>
+	  <option value="Above Normal Return">Above Normal Return</option>
+	  <option value="Return Maximization">Return Maximization</option>
+	</select>
+	</div>
+	
+
+	<center><input type="submit" value="SUBMIT"></center>
+	</form>
+
+</div>
+</div>
+
+{% endblock %}
+
+		
 
 	<!-- we start with <input> and <datalist> elements. Ensure that you link the two using the id and list attributes. -->
     <!-- <div id="page-wrapper"> -->
@@ -81,9 +152,9 @@ once the user enters info he is taken back or to user_list.html -->
 	<!-- deleted from here -->
 		<!-- <div id="page-wrapper"> -->
 		<!-- <div class="fieldwrapper">
-    <tr><center><input type="text" id="ajax" list="json-datalist" placeholder="e.g. GOOG">
+    <center><input type="text" id="ajax" list="json-datalist" placeholder="e.g. GOOG">
     	<input type="submit" id="addbutton" value="ADD" />
-		<datalist id="json-datalist"></datalist></center> </tr>
+		<datalist id="json-datalist"></datalist></center> 
 		
 	<script>
 	// Get the <datalist> and <input> elements.
@@ -149,90 +220,14 @@ request.send();
 
 
 
-<div class="container"> 
-	<tr>
-	<th>
-	<center><p>Kindly help us with some additional information below:
-	</p></center>
-	</th>
-	</tr>
-<tr>
-	<th>Age Group:</th>
-	<td>
-	<select name="agegroup">
-	  <option value="" style="display:none;"></option>		
-	  <option value="20-30 Years">20-30 Years</option>
-	  <option value="30-45 Years">30-45 Years </option>
-	  <option value="45-60 Years">45-60 Years</option>
-	  <option value=">60 Years">>60 Years</option>
-	</select>
-	</td>
-</tr>
-<tr>	
-	<th>Gender:</th>
-	<td>
-	<select name="gender">
-	  <option value="" style="display:none;"></option>	
-	  <option value="male">Male</option>
-	  <option value="female">Female</option>
-	</select>
-	</td>
-</tr>
-</tr>
-	<th>Annual Income Range:</th>
-	<td>
-	<select name="income">
-	  <option value="" style="display:none;"></option>		
-	  <option value="$45-$80 K">$45-$80 K</option>
-	  <option value="$80-$120 K">$80-$120 K</option>
-	  <option value="$120-$200 K">$120-$200 K</option>
-	  <option value=">$200 K">>$200 K</option>
-	</select>
-	</td>
-</tr>
-<tr>
-	<th>Investible Surplus:</th>
-	<td>
-	<select name="amounttotinvest">
-	  <option value="" style="display:none;"></option>		
-	  <option value="$1-$5 K">$1-$5 K</option>
-	  <option value="$5-$10 K">$5-$10 K</option>
-	  <option value=">$10 K">>$10 K</option>
-	</select>
-	</td>
-</tr>
-<tr>
-	<th>Risk Expectations:</th>
-	<td>
-	<select name="riskexpectation">
-	  <option value="" style="display:none;"></option>		
-	  <option value="Risk Averse">Risk Averse</option>
-	  <option value="Risk Neutral">Risk Neutral</option>
-	  <option value="Risk Taker">Risk Taker</option>
-	</select>
-	</td>
-</tr>
-<tr>
-	<th>Return Expectations:</th>
-	<td>
-	<select name="returnexpectation">
-	  <option value="" style="display:none;"></option>		
-	  <option value="Normal Return">Normal Return</option>
-	  <option value="Above Normal Return">Above Normal Return</option>
-	  <option value="Return Maximization">Return Maximization</option>
-	</select>
-	</td>
-</tr>
-
-</div>
 <!-- Use a input range slider instead but in sprint 2 -->
-<!-- <tr>
+<!-- 
 	
 
 <div>
-<th><label for="fader"><center>Risk Return Expectations</center></label></th>
+<label for="fader"><center>Risk Return Expectations</center></label>
 <br>
-<td><input type="range" min="0" max="10" value="5" id="fader" 
+<input type="range" min="0" max="10" value="5" id="fader" 
 	step="2.5" list="riskreturnsettings">
 	<center>
 	<datalist id="riskreturnsettings">
@@ -241,17 +236,17 @@ request.send();
 	<option value="Normal Returns">Normal Returns</option>
 	<option value="Return Maximization">Return Maximization</option>
 </datalist>
-</td>
+
 </center>
 </div>-->
 
 
-</tr>
 
-  <tr>
-  	<td><center><input type="submit" value="SUBMIT"></center>
-  	</td>
-  	 </tr>
+
+  
+  
+  	
+  	 
   
 
 <!-- 
@@ -273,11 +268,6 @@ request.send();
 
  -->
 	
-</form>
 
-
-
-
-{% endblock %}
 
 

@@ -6,55 +6,50 @@
 we go to results.html page -->
 <!-- <form action="/final" method="POST"> -->
 <div class="container">
-<div class="row"> 
-<table class="table table-striped">
-    <center><p>Please review your list of stocks chosen. Would you like to proceed?</p></center>
-        <thead>
-        <tr><center>
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+
+    <table class="table table-striped">     
+    <thead>
+       
+      <tr> <center><p>Please review your list of stocks chosen. Would you like to proceed?</p></center></tr>
+   
+      <tr class="col-xs-offset-3">
             <th>Symbol</th>
             <th>Name</th>
-            <th>Sector</th> </center>       
+            <th>Sector</th>       
             </tr>
         </thead>
+        
         <tbody>
         	{% for stock in symbol_info_list %} <!-- query the database for the stock info in flask route -->
-        <tr>
+        <tr class="table-data">
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
             <td>{{ stock.symbol }}</td>
             <td>{{ stock.name }}</td>
             <td>{{ stock.sector }}</td>
+            {% endfor %}
         </tr>
+    </tbody>       
+</table>
+</div>
+</div>
 
-           {% endfor %}
+         
 
-
-           <br>
-             
-          
-        
-        <!-- <tr>
-        
-            <td>Gender: {{ g_values["gender"] }} </td><br>
-            <td>Age Group: {{ g_values["agegroup"] }} </td><br>
-            <td>Income: {{ g_values["income"] }} </td><br>
-            <td>Amount to Invest: {{ g_values["amounttoinvest"] }} </td><br>
-            <td>Risk Expectation: {{ g_values["riskexpectation"] }} </td><br>
-            <td>Return Expectation: {{ g_values["returnexpectation"] }} </td>
-        </tr>  --> 
                  
 
       
-            <div id="frm">
-        <div style="width:400px;">
-        <div style="float: left; width:5px">
-            <form action='/start'>
-            <input type="submit" value="Go Back"> <!--To Return to Previous Page  -->
-             </div>
-         </form>
-       
-             <p>OR</p>    
+
+    
             
-            <form action='/final' method="POST">
+            <form action='/start' id="go-back-form">
+            <input type="submit" value="Go Back"> <!--To Return to Previous Page  -->
+            </form>
+     
+             <span id="in-between">OR</span>
+            
+            <form action='/final' method="POST" id="go-ahead">
                  
                  {% for stock in symbol_info_list %}
                  <input type="checkbox" name="symbol" value="{{stock.symbol}}" checked="checked" style= "display:none"> 
@@ -67,15 +62,13 @@ we go to results.html page -->
                 <input type="hidden" id="riskexpectation" name="riskexpectation" value='{{session["g_values"]["riskexpectation"]}}'>
                 <input type="hidden" id="returnexpectation" name="returnexpectation" value='{{session["g_values"]["returnexpectation"]}}'>
              
-            <div style="float: right; width:5px">
+           
             <input type="submit" value="Go for It">  <!--To move to results Page  --> 
-            </div>
-        </form>
+            </form>
         
-    </div>
+   
             </div>
             </div>
-             </div>
-
-        <!-- BOOTSTRAP TO DO later for appearing in same line -->
+      
+    
 {% endblock %}

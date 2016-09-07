@@ -10,7 +10,7 @@
  
           
      <!-- Style -->  
-    <link rel="stylesheet" href="/static/css/site.css"/></link>
+    
     <link href="/static/css/chart.css" rel="stylesheet"></link>
     <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
      <!-- Javascript Imports -->
@@ -18,23 +18,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/site.css"/></link>
      
 
 
 
-   <!-- Using below- Chosen, a Select Box Enhancer for jQuery and Prototype
-by Patrick Filler for Harvest, http://getharvest.com
-Version 1.6.2
-Full source at https://github.com/harvesthq/chosen
-Copyright (c) 2011-2016 Harvest http://gethavenrvest.com
-MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md -->
-<!--   <script src="https://code.jquery.com/static/vendor/chosen.jquery.js"></script>
-  <script src="https://code.jquery.com/static/vendor/chosen.jquery.min.js"></script>
-  <link href="/static/vendor/chosen.min.css" rel="stylesheet"></link> -->
 
     
 </head>
-<body>
+
+<!-- <body style="background:static/dollar.jpg"> -->
+<body background="static/dollar.jpg">
  <nav class="navbar navbar-default"> 
       <div class="container-fluid"> 
 <!-- Brand and toggle get grouped for better mobile display --> 
@@ -62,12 +56,12 @@ MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md -->
  </nav> 
 
 
-
+<div class="container-fluid">  
  <h1>
     <center>Your Stock Allocation Pie!</center>
     <h3><p><center> A site to guide you to allocate your money to the stocks of your choice! </center></p></h3>
     </h1>
-  <div class="container"> 
+  
         {% if get_flashed_messages() %} 
             <div class="alert alert-info" role="alert"> 
                <!-- Show flashed messages-->  
@@ -78,13 +72,14 @@ MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md -->
                  {% endwith %} 
              </div> 
          {% endif %} 
-     </div> 
+    
 
 
 {% block content %} CONTENT HERE {% endblock %} 
+ </div> 
 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-</body>
+
 
 
 
@@ -95,10 +90,11 @@ MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md -->
     <font face="arial" size="-2">
     <p class="text-muted">Data and information is provided for informational purposes only, and is not intended for trading purposes. Neither the site or the site owner shall be liable for any errors or delays in the content, or for any actions taken in reliance thereof </p>
    
-  </font> </div>
-   </footer>
+  </font> 
+  </div>
+  </footer>
      
-   
+ </body>  
 
 
 </html>
